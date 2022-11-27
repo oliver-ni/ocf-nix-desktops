@@ -33,7 +33,12 @@
 
   # Base set of packages to install...
   environment.systemPackages = with pkgs; [
-    kubernetes
+    # System Utilities
+    util-linux
+    iproute2
+    ethtool
+
+    # Helpful Tools
     vim
     wget
   ];
