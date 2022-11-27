@@ -41,6 +41,7 @@
     # Helpful Tools
     vim
     wget
+    git
   ];
 
   # TODO: Replace me with teleport SSH!
@@ -52,6 +53,7 @@
   # TODO: This won't work for fallingrocks...
   networking.defaultGateway = "169.229.226.1";
   networking.nameservers = [ "1.1.1.1" "1.0.0.1" ];
+  networking.useDHCP = false;
 
   # THIS SETTING DOES NOT DO WHAT YOU THINK IT DOES
   # DO NOT MODIFY IT UNTIL YOU HAVE READ AND UNDERSTOOD
