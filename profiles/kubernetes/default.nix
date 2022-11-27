@@ -20,7 +20,8 @@ in {
       "kubernetes/kubeadm.yaml".source = ./kubeadm.yaml;
     };
 
-    boot.kernelModules = [ "br_netfilter" ];
+    # For some reason, NixOS doesn't load ip6_tables, so manually loading it here...
+    boot.kernelModules = [ "br_netfilter" "ip6_tables" "ip6table_mangle" "ip6table_raw" "ip6table_filter" ];
 
     boot.kernel.sysctl = {
       "net.ipv4.ip_forward" = 1;  
