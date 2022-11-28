@@ -1,7 +1,7 @@
 { config, pkgs, lib, ... }:
 
 let
-  kubePkgs = with pkgs; [ kubernetes cri-o util-linux iproute2 ethtool iptables socat conntrack-tools ];
+  kubePkgs = with pkgs; [ kubernetes cri-o util-linux iproute2 ethtool iptables-legacy socat conntrack-tools ];
 in {
   # Configuration for Nodes
   options.services.ocfKubernetes = {
@@ -55,6 +55,10 @@ in {
     # <https://kubernetes.io/docs/reference/ports-and-protocols/>
     networking.firewall.allowedTCPPorts = [ 6443 2379 2380 10250 10259 10257 10250 ];
     networking.firewall.allowedTCPPortRanges = [ { from = 30000; to = 32767; } ];
+
+    # <https://github.com/NixOS/nixpkgs/issues/179741>
+    networking.nftables.enable = false;
+    networking.firewall.package = pkgs.iptables-legacy;
 
     boot.kernel.sysctl = {
       "net.ipv4.ip_forward" = 1;  
