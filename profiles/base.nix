@@ -52,6 +52,7 @@
 
   # TODO: This won't work for fallingrocks...
   networking.defaultGateway = "169.229.226.1";
+  networking.defaultGateway6 = "2607:f140:8801::1";
   networking.nameservers = [ "1.1.1.1" "1.0.0.1" ];
   networking.useDHCP = false;
 
