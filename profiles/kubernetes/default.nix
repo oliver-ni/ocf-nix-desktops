@@ -20,8 +20,37 @@ in {
       "kubernetes/kubeadm.yaml".source = ./kubeadm.yaml;
     };
 
-    # For some reason, NixOS doesn't load ip6_tables, so manually loading it here...
-    boot.kernelModules = [ "br_netfilter" "ip6_tables" "ip6table_mangle" "ip6table_raw" "ip6table_filter" ];
+    boot.kernelModules = [
+      "aes"
+      "algif_hash"
+      "br_netfilter"
+      "cls_bpf"
+      "cls_ingress"
+      "cryptd"
+      "encrypted_keys"
+      "ip6_tables"
+      "ip6table_filter"
+      "ip6table_mangle"
+      "ip6table_raw"
+      "ip_set"
+      "ip_set_hash_ip"
+      "rbd"
+      "sch_fq"
+      "sha1"
+      "sha256"
+      "xt_CT"
+      "xt_TPROXY"
+      "xt_mark"
+      "xt_set"
+      "xt_socket"
+      "xts"
+    ];
+
+    # <https://docs.cilium.io/en/stable/operations/system_requirements/#mounted-ebpf-filesystem>
+    fileSystems."/sys/fs/bpf" = {
+      device = "bpffs";
+      fsType = "bpf";
+    };
 
     boot.kernel.sysctl = {
       "net.ipv4.ip_forward" = 1;  

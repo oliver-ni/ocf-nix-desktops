@@ -47,8 +47,8 @@
   # TODO: Replace me with teleport SSH!
   services.openssh.enable = true;
 
-  # We use Cilium anyway, but probably replace this with nftables if you do ever enable it.
-  networking.firewall.enable = false;
+  networking.firewall.enable = true;
+  networking.firewall.allowedTCPPorts = [ 22 ];
 
   # TODO: This won't work for fallingrocks...
   networking.defaultGateway = "169.229.226.1";
