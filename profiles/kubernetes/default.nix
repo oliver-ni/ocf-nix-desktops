@@ -71,6 +71,9 @@ in {
 
     virtualisation.cri-o.enable = true;
     virtualisation.cri-o.extraPackages = [ pkgs.gvisor ];
+    virtualisation.cri-o.settings = {
+      cri-o.network.plugin_dirs = [ "/opt/cni/bin" ];
+    };
 
     systemd.services.kubelet = {
       description = "Kubelet <https://kubernetes.io/docs/reference/command-line-tools-reference/kubelet/>";
