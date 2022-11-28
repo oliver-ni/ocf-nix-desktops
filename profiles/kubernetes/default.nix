@@ -52,6 +52,10 @@ in {
       fsType = "bpf";
     };
 
+    # <https://kubernetes.io/docs/reference/ports-and-protocols/>
+    networking.firewall.allowedTCPPorts = [ 6443 2379 2380 10250 10259 10257 10250 ];
+    networking.firewall.allowedTCPPortRanges = [ { from = 30000; to = 32767; } ];
+
     boot.kernel.sysctl = {
       "net.ipv4.ip_forward" = 1;  
       "net.ipv6.conf.all.forwarding" = 1;
