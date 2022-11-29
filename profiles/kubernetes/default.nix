@@ -1,7 +1,7 @@
 { config, pkgs, lib, ... }:
 
 let
-  kubePkgs = with pkgs; [ kubernetes util-linux iproute2 ethtool containerd runc iptables-legacy socat conntrack-tools gvisor ];
+  kubePkgs = with pkgs; [ kubernetes util-linux iproute2 ethtool containerd runc iptables-legacy socat conntrack-tools gvisor cri-tools ebtables ];
 in {
   # Configuration for Nodes
   options.services.ocfKubernetes = {
