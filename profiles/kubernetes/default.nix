@@ -1,7 +1,7 @@
 { config, pkgs, lib, ... }:
 
 let
-  kubePkgs = with pkgs; [ kubernetes cri-o util-linux iproute2 ethtool iptables-legacy socat conntrack-tools ];
+  kubePkgs = with pkgs; [ kubernetes util-linux iproute2 ethtool containerd runc iptables-legacy socat conntrack-tools gvisor ];
 in {
   # Configuration for Nodes
   options.services.ocfKubernetes = {
@@ -69,10 +69,17 @@ in {
 
     environment.systemPackages = kubePkgs;
 
-    virtualisation.cri-o.enable = true;
-    virtualisation.cri-o.extraPackages = [ pkgs.gvisor ];
-    virtualisation.cri-o.settings = {
-      cri-o.network.plugin_dirs = [ "/opt/cni/bin" ];
+    virtualisation.containerd.enable = true;
+    systemd.services.containerd.path = kubePkgs;
+    virtualisation.containerd.settings = {
+      plugins."io.containerd.grpc.v1.cri" = {
+        # <https://docs.cilium.io/en/v1.12/concepts/kubernetes/configuration/#cni>
+        cni.bin_dir = "/opt/cni/bin";
+        # <https://github.com/containerd/containerd/blob/main/docs/cri/config.md#runtime-classes>
+        containerd.runtimes.gvisor.runtime_type = "io.containerd.runsc.v1";
+        # <https://kubernetes.io/docs/setup/production-environment/container-runtimes/#containerd-systemd>
+        containerd.runtimes.runc.options.SystemdCgroup = true;
+      };
     };
 
     systemd.services.kubelet = {
