@@ -76,6 +76,8 @@ in {
         # <https://docs.cilium.io/en/v1.12/concepts/kubernetes/configuration/#cni>
         cni.bin_dir = "/opt/cni/bin";
         # <https://github.com/containerd/containerd/blob/main/docs/cri/config.md#runtime-classes>
+        containerd.default_runtime_name = "runc";
+        containerd.runtimes.runc.runtime_type = "io.containerd.runc.v1";
         containerd.runtimes.gvisor.runtime_type = "io.containerd.runsc.v1";
         # <https://kubernetes.io/docs/setup/production-environment/container-runtimes/#containerd-systemd>
         containerd.runtimes.runc.options.SystemdCgroup = true;
