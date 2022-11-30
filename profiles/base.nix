@@ -5,6 +5,9 @@
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
 
+  # Kernel
+  boot.kernelPackages = pkgs.linuxPackages_6_0;
+
   # Timezones and Locale
   time.timeZone = "America/Los_Angeles";
   i18n.defaultLocale = "en_US.UTF-8";
@@ -47,7 +50,7 @@
   # TODO: Replace me with teleport SSH!
   services.openssh.enable = true;
 
-  networking.firewall.enable = true;
+  networking.firewall.enable = false;
   networking.firewall.allowedTCPPorts = [ 22 ];
 
   # TODO: This won't work for fallingrocks...
