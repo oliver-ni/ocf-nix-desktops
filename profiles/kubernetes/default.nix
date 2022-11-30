@@ -25,7 +25,6 @@ in {
       "algif_hash"
       "br_netfilter"
       "cls_bpf"
-      "cls_ingress"
       "cryptd"
       "encrypted_keys"
       "ip_tables"
@@ -56,8 +55,15 @@ in {
       fsType = "bpf";
     };
 
+    networking.firewall.allowedTCPPorts = [
+      # <https://kubernetes.io/docs/reference/ports-and-protocols/>
+      6443 2379 2380 10250 10259 10257 10250
+      # <https://docs.cilium.io/en/v1.11/operations/system_requirements/#firewall-rules>
+      4240
+    ];
+    # <https://docs.cilium.io/en/v1.11/operations/system_requirements/#firewall-rules>
+    networking.firewall.allowedUDPPorts = [ 8472 ];
     # <https://kubernetes.io/docs/reference/ports-and-protocols/>
-    networking.firewall.allowedTCPPorts = [ 6443 2379 2380 10250 10259 10257 10250 ];
     networking.firewall.allowedTCPPortRanges = [ { from = 30000; to = 32767; } ];
 
     # <https://github.com/NixOS/nixpkgs/issues/179741>
