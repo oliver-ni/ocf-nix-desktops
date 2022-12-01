@@ -24,6 +24,7 @@ in {
       "aes"
       "algif_hash"
       "br_netfilter"
+      "ceph"
       "cls_bpf"
       "cryptd"
       "encrypted_keys"

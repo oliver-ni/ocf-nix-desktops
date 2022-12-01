@@ -3,10 +3,10 @@
 
   inputs = {
     # Pinned to NixOS 22.11 beta since that's coming out soon anyway
-    nixpkgs.url = github:nixos/nixpkgs/22.11-beta;
+    nixpkgs.url = github:nixos/nixpkgs/22.11;
 
     # Separate nixpkgs pin for Kubernetes (we don't want to accidentally update that)
-    kubePin.url = github:nixos/nixpkgs/bb029673bface2fc9fb807f209f63ca06478a72d;
+    kubePin.url = github:nixos/nixpkgs/4d2b37a84fad1091b9de401eb450aae66f1a741e;
 
     # Some helper methods...
     flakeUtils.url = github:gytis-ivaskevicius/flake-utils-plus/v1.3.1;
