@@ -1,7 +1,7 @@
 { config, pkgs, lib, ... }:
 
 let
-  kubePkgs = with pkgs; [ kubernetes util-linux iproute2 ethtool containerd runc iptables-legacy socat conntrack-tools gvisor cri-tools ebtables ];
+  kubePkgs = with pkgs; [ kubernetes util-linux iproute2 ethtool cri-o iptables-legacy socat conntrack-tools gvisor cri-tools ebtables ];
 in {
   # Configuration for Nodes
   options.services.ocfKubernetes = {
@@ -80,22 +80,23 @@ in {
 
     environment.systemPackages = kubePkgs;
 
-    virtualisation.containerd.enable = true;
-    systemd.services.containerd.path = kubePkgs;
-    virtualisation.containerd.settings = {
-      plugins."io.containerd.grpc.v1.cri" = {
-        # <https://docs.cilium.io/en/v1.12/concepts/kubernetes/configuration/#cni>
-        cni.bin_dir = "/opt/cni/bin";
-        cni.conf_dir = "/etc/cni/net.d";
-        # <https://github.com/containerd/containerd/blob/main/docs/cri/config.md#runtime-classes>
-        containerd.default_runtime_name = "crun";
-        containerd.runtimes.runc.runtime_type = "io.containerd.runc.v2";
-        containerd.runtimes.crun.runtime_type = "io.containerd.runc.v2";
-        plugins."io.containerd.grpc.v1.cri".containerd.runtimes.crun.options.BinaryName = "${pkgs.crun}/bin/crun";
-        containerd.runtimes.gvisor.runtime_type = "io.containerd.runsc.v1";
-        # <https://kubernetes.io/docs/setup/production-environment/container-runtimes/#containerd-systemd>
-        containerd.runtimes.runc.options.SystemdCgroup = true;
-      };
+    ocf.cri-o.enable = true;
+    ocf.cri-o.extraPackages = [ pkgs.gvisor ];
+    ocf.cri-o.settings = {
+        storage_driver = "overlay";
+
+        image = {
+            pause_image = "k8s.gcr.io/pause:3.2";
+        };
+
+        runtime = {
+            cgroup_manager = "systemd";
+            log_level = "info";
+            manage_ns_lifecycle = true;
+            pinns_path = "${pkgs.cri-o}/bin/pinns";
+        };
+
+        cri-o.network.plugin_dirs = [ "/opt/cni/bin" ];
     };
 
     systemd.services.kubelet = {
