@@ -86,10 +86,12 @@ in {
       plugins."io.containerd.grpc.v1.cri" = {
         # <https://docs.cilium.io/en/v1.12/concepts/kubernetes/configuration/#cni>
         cni.bin_dir = "/opt/cni/bin";
-	cni.conf_dir = "/etc/cni/net.d";
+        cni.conf_dir = "/etc/cni/net.d";
         # <https://github.com/containerd/containerd/blob/main/docs/cri/config.md#runtime-classes>
-        containerd.default_runtime_name = "runc";
+        containerd.default_runtime_name = "crun";
         containerd.runtimes.runc.runtime_type = "io.containerd.runc.v2";
+        containerd.runtimes.crun.runtime_type = "io.containerd.runc.v2";
+        plugins."io.containerd.grpc.v1.cri".containerd.runtimes.crun.options.BinaryName = "${pkgs.crun}/bin/crun";
         containerd.runtimes.gvisor.runtime_type = "io.containerd.runsc.v1";
         # <https://kubernetes.io/docs/setup/production-environment/container-runtimes/#containerd-systemd>
         containerd.runtimes.runc.options.SystemdCgroup = true;
