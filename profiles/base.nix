@@ -56,10 +56,11 @@
   services.teleport = {
     enable = true;
     settings = {
+      version = "v2";
       teleport = {
         nodename = config.networking.hostName;
         auth_token = "/var/lib/ocfteleport/authtoken";
-        auth_server = "tele.ocf.io:443";
+        auth_servers = [ "tele.ocf.io:443" ];
       };
       ssh_service.enabled = true;
     };
