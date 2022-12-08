@@ -63,6 +63,13 @@
         auth_servers = [ "tele.ocf.io:443" ];
       };
       ssh_service.enabled = true;
+      auth_service.enabled = false;
+      proxy_service.enabled = false;
+      app_service.enabled = false;
+      kubernetes_service.enabled = false;
+      discovery_service.enabled = false;
+      db_service.enabled = false;
+      windows_desktop_service.enabled = false;
     };
   };
 
