@@ -23,15 +23,15 @@
       "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIFVE2dTNVA/m2VeEq18HTWOhDvFYr33O0OW0ivBKEFJc rjz@ocf.berkeley.edu"
     ];
   };
-  
+
   security.sudo.extraRules = [
-    { 
+    {
       users = [ "ocfemergency" ];
       commands = [
-         {
-           command = "ALL" ;
-           options= [ "NOPASSWD" ];
-         }
+        {
+          command = "ALL";
+          options = [ "NOPASSWD" ];
+        }
       ];
     }
   ];
@@ -53,16 +53,16 @@
   services.openssh.enable = true;
 
   # Teleport
-  services.teleport.enable = true;
-  services.teleport.settings = {
-    teleport = {
-      nodename = config.networking.hostName;
+  services.teleport = {
+    enable = true;
+    settings = {
+      teleport = {
+        nodename = config.networking.hostName;
+        auth_token = "/var/lib/ocfteleport/authtoken";
+        auth_server = "tele.ocf.io:443";
+      };
+      ssh_service.enabled = true;
     };
-    ssh_service = {
-      enabled = true;
-    };
-    proxy_service.enabled = false;
-    auth_service.enabled = false;
   };
 
   networking.firewall.enable = false;
