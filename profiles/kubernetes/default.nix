@@ -125,5 +125,11 @@ in {
         '';
       };
     };
+
+    # TODO: Remove when this is fixed in upstream Ceph, or if there's a better workaround.
+    # <https://github.com/rook/rook/issues/11474#issuecomment-1365523469>
+    services.udev.extraRules = ''
+      ACTION=="add|change", KERNEL=="sd[a-c]", ATTR{removable}="0"
+    '';
   };
 }
