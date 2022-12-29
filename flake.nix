@@ -12,7 +12,7 @@
     flakeUtils.url = github:gytis-ivaskevicius/flake-utils-plus/v1.3.1;
   };
 
-  outputs = { self, flakeUtils, kubePin, ... }@inputs:
+  outputs = { self, flakeUtils, ... }@inputs:
     flakeUtils.lib.mkFlake {
       inherit self inputs;
 
