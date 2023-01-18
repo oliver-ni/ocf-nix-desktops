@@ -88,12 +88,6 @@
   networking.nameservers = [ "1.1.1.1" "1.0.0.1" ];
   networking.useDHCP = false;
 
-  # This is the OCF Root certificate, stored in a safe in the server
-  # room. If someone has access to the server room it's game over
-  # anyway so this is Secure (TM).
-  security.pki.certificateFiles = [ ./root.crt ];
-  security.pki.certificates = [ (builtins.readFile ./root.crt) ];
-
   # THIS SETTING DOES NOT DO WHAT YOU THINK IT DOES
   # DO NOT MODIFY IT UNTIL YOU HAVE READ AND UNDERSTOOD
   # https://search.nixos.org/options?show=system.stateVersion
