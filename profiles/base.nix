@@ -88,30 +88,11 @@
   networking.nameservers = [ "1.1.1.1" "1.0.0.1" ];
   networking.useDHCP = false;
 
-  # TODO: Move this to another file.
   # This is the OCF Root certificate, stored in a safe in the server
   # room. If someone has access to the server room it's game over
   # anyway so this is Secure (TM).
-  security.pki.certificates = [''
-      -----BEGIN CERTIFICATE-----
-    MIIC7jCCAk+gAwIBAgIUZPQZpVG1GfVIKkcvKb5vwky5RTAwCgYIKoZIzj0EAwQw
-    gY8xCzAJBgNVBAYTAlVTMRMwEQYDVQQIEwpDYWxpZm9ybmlhMREwDwYDVQQHEwhC
-    ZXJrZWxleTEgMB4GA1UEChMXT3BlbiBDb21wdXRpbmcgRmFjaWxpdHkxDDAKBgNV
-    BAsTA0FsbDEoMCYGA1UEAxMfT3BlbiBDb21wdXRpbmcgRmFjaWxpdHkgUm9vdCBY
-    MTAgFw0yMzAxMTYyMzM5MDBaGA8yMTIzMDExNjIzMzkwMFowgY8xCzAJBgNVBAYT
-    AlVTMRMwEQYDVQQIEwpDYWxpZm9ybmlhMREwDwYDVQQHEwhCZXJrZWxleTEgMB4G
-    A1UEChMXT3BlbiBDb21wdXRpbmcgRmFjaWxpdHkxDDAKBgNVBAsTA0FsbDEoMCYG
-    A1UEAxMfT3BlbiBDb21wdXRpbmcgRmFjaWxpdHkgUm9vdCBYMTCBmzAQBgcqhkjO
-    PQIBBgUrgQQAIwOBhgAEAaXbYJW1MmFY27rALUopMUWDNC4DS+A4trLyTOqf8M+x
-    OrIDDkaEZHjhD5ofAcsyCKQf4tMNGqsj4RKAYhOxJLLDAHJLcpV63S+EojFkUJpr
-    PtH81lf9toed/yi16f+V159qQ+PF+cGSXkHSyzUHPcqhuVrbuH37/AJNohgDPGmN
-    rKWDo0IwQDAOBgNVHQ8BAf8EBAMCAQYwDwYDVR0TAQH/BAUwAwEB/zAdBgNVHQ4E
-    FgQUYk/x6J54THpb1Xv9lNNqZWvbEtMwCgYIKoZIzj0EAwQDgYwAMIGIAkIBzWa7
-    +3IgvnGLPv5UaU1tQVOGfAfvW3LYtZSDZ543bAIFVNLxpdhozZAeAfjBuPzSY/yh
-    T1O56toa7dMv4tILfGsCQgGSQ3VEVnuqwUTGnchcZYsHZtsRSQ/AglekXrphZCxa
-    xqg2jrBElQrI7xM3NcqlerzdvSzMgVJA3XyqXQJ7uAC9ag==
-    -----END CERTIFICATE-----
-  ''];
+  security.pki.certificateFiles = [ ./root.crt ];
+  security.pki.certificates = [ (builtins.readFile ./root.crt) ];
 
   # THIS SETTING DOES NOT DO WHAT YOU THINK IT DOES
   # DO NOT MODIFY IT UNTIL YOU HAVE READ AND UNDERSTOOD
