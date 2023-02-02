@@ -10,6 +10,10 @@ apiServer:
   - dna.ocf.io
   - dna.ocf.berkeley.edu
 clusterName: ocf-dna
+controllerManager:
+  extraArgs:
+    node-cidr-mask-size-ipv6: "120" # match ipv4 for pods/node
+    node-cidr-mask-size-ipv4: "24"  # default
 ---
 kind: KubeletConfiguration
 apiVersion: kubelet.config.k8s.io/v1beta1
