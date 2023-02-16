@@ -3,7 +3,7 @@
 
   inputs = {
     # Pinned to NixOS 22.11 beta since that's coming out soon anyway
-    nixpkgs.url = github:nixos/nixpkgs/22.11;
+    nixpkgs.url = github:nixos/nixpkgs/nixos-22.11;
 
     # Separate nixpkgs pin for Kubernetes (we don't want to accidentally update that)
     kubePin.url = github:nixos/nixpkgs/4d2b37a84fad1091b9de401eb450aae66f1a741e;
@@ -33,6 +33,10 @@
       hosts.guanine.modules = [ ./hosts/guanine.nix ]; # nucleus B
       hosts.cytosine.modules = [ ./hosts/cytosine.nix ]; # nucleus C
       hosts.thymine.modules = [ ./hosts/thymine.nix ]; # nucleus D
+
+      outputsBuilder = channels: {
+        formatter = channels.nixpkgs.nixpkgs-fmt;
+      };
     };
 }
 

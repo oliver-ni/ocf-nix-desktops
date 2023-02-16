@@ -6,7 +6,7 @@
   boot.loader.efi.canTouchEfiVariables = true;
 
   # Kernel
-  boot.kernelPackages = pkgs.linuxPackages_6_0;
+  boot.kernelPackages = pkgs.linuxPackages_latest;
 
   # Timezones and Locale
   time.timeZone = "America/Los_Angeles";
