@@ -25,6 +25,7 @@
       "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIHC9Yh1qdHa9rq28Ki0i53vtHgg9ksKq8vg9M+9GGPA5 etw+d@ocf.berkeley.edu"
       "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIFVE2dTNVA/m2VeEq18HTWOhDvFYr33O0OW0ivBKEFJc rjz@ocf.berkeley.edu"
       "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIGlViRB5HH1bTaS1S7TcqVBSuxKdrbdhL2CmhDqc/t6A oliverni@ocf.berkeley.edu"
+      "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAILIM4dbtLQlsXn0d7GlrwLvipOLakJgQ58MdracqGfPa kian@ocf.berkeley.edu"
     ];
   };
 
