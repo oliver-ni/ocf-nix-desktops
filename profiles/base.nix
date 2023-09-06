@@ -23,7 +23,7 @@
       "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIGiiq/rSfG+bKmqKZfCSl1z2r7rc3Wt/Paya/JYmjdSO strudel@nikhiljha.com"
       "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIA2yyisYL1t5u4f0FPBFKs0jAr4MWZphCb8beBvu7xSw etw+a@ocf.berkeley.edu"
       "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIHC9Yh1qdHa9rq28Ki0i53vtHgg9ksKq8vg9M+9GGPA5 etw+d@ocf.berkeley.edu"
-      "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIFVE2dTNVA/m2VeEq18HTWOhDvFYr33O0OW0ivBKEFJc rjz@ocf.berkeley.edu"
+      "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIHPeJeRNwcPaZupbmCEtUIOuLDfhow35byMp548TUDYP rjz+u@ocf.berkeley.edu"
       "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIGlViRB5HH1bTaS1S7TcqVBSuxKdrbdhL2CmhDqc/t6A oliverni@ocf.berkeley.edu"
       "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAILIM4dbtLQlsXn0d7GlrwLvipOLakJgQ58MdracqGfPa kian@ocf.berkeley.edu"
     ];
