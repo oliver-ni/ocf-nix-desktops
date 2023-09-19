@@ -83,7 +83,7 @@ in
     networking.firewall.package = pkgs.iptables-legacy;
 
     boot.kernel.sysctl = {
-      "net.ipv4.ip_forward" = 1;  
+      "net.ipv4.ip_forward" = 1;
       "net.ipv6.conf.all.forwarding" = 1;
       "net.bridge.bridge-nf-call-iptables" = 1;
       "net.bridge.bridge-nf-call-ip6tables" = 1;
@@ -94,20 +94,24 @@ in
     ocf.cri-o.enable = true;
     ocf.cri-o.extraPackages = [ pkgs.gvisor ];
     ocf.cri-o.settings = {
-        storage_driver = "overlay";
+      storage_driver = "overlay";
 
-        image = {
-            pause_image = "k8s.gcr.io/pause:3.2";
+      image = {
+        pause_image = "k8s.gcr.io/pause:3.2";
+      };
+
+      runtime = {
+        cgroup_manager = "systemd";
+        log_level = "info";
+        manage_ns_lifecycle = true;
+        pinns_path = "${pkgs.cri-o}/bin/pinns";
+
+        runtimes.runsc = {
+          runtime_path = "${pkgs.gvisor}/bin/runsc";
         };
+      };
 
-        runtime = {
-            cgroup_manager = "systemd";
-            log_level = "info";
-            manage_ns_lifecycle = true;
-            pinns_path = "${pkgs.cri-o}/bin/pinns";
-        };
-
-        cri-o.network.plugin_dirs = [ "/opt/cni/bin" ];
+      cri-o.network.plugin_dirs = [ "/opt/cni/bin" ];
     };
 
     systemd.services.kubelet = {
