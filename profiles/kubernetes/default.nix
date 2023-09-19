@@ -2,7 +2,8 @@
 
 let
   kubePkgs = with pkgs; [ kubernetes util-linux iproute2 ethtool cri-o iptables-legacy socat conntrack-tools gvisor cri-tools ebtables ];
-in {
+in
+{
   # Configuration for Nodes
   options.services.ocfKubernetes = {
     enable = lib.mkEnableOption "Enables everything needed to run kubeadm.";
@@ -62,14 +63,20 @@ in {
     # can figure out how to get Firewall to work at some point (or use Cilium host firewall tbh).
     networking.firewall.allowedTCPPorts = [
       # <https://kubernetes.io/docs/reference/ports-and-protocols/>
-      6443 2379 2380 10250 10259 10257 10250
+      6443
+      2379
+      2380
+      10250
+      10259
+      10257
+      10250
       # <https://docs.cilium.io/en/v1.11/operations/system_requirements/#firewall-rules>
       4240
     ];
     # <https://docs.cilium.io/en/v1.11/operations/system_requirements/#firewall-rules>
     networking.firewall.allowedUDPPorts = [ 8472 ];
     # <https://kubernetes.io/docs/reference/ports-and-protocols/>
-    networking.firewall.allowedTCPPortRanges = [ { from = 30000; to = 32767; } ];
+    networking.firewall.allowedTCPPortRanges = [{ from = 30000; to = 32767; }];
 
     # <https://github.com/NixOS/nixpkgs/issues/179741>
     networking.nftables.enable = false;
