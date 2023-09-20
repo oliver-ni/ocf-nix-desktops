@@ -94,24 +94,9 @@ in
     ocf.cri-o.enable = true;
     ocf.cri-o.extraPackages = [ pkgs.gvisor ];
     ocf.cri-o.settings = {
-      storage_driver = "overlay";
-
-      image = {
-        pause_image = "k8s.gcr.io/pause:3.2";
+      crio.runtime.runtimes.runsc = {
+        runtime_path = "${pkgs.gvisor}/bin/runsc";
       };
-
-      runtime = {
-        cgroup_manager = "systemd";
-        log_level = "info";
-        manage_ns_lifecycle = true;
-        pinns_path = "${pkgs.cri-o}/bin/pinns";
-
-        runtimes.runsc = {
-          runtime_path = "${pkgs.gvisor}/bin/runsc";
-        };
-      };
-
-      cri-o.network.plugin_dirs = [ "/opt/cni/bin" ];
     };
 
     systemd.services.kubelet = {
