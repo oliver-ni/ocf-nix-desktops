@@ -6,7 +6,7 @@
     nixpkgs.url = "github:NixOS/nixpkgs/23.11";
 
     # Separate nixpkgs pin for Kubernetes (we don't want to accidentally update that)
-    kubePin.url = "github:nixos/nixpkgs/4d2b37a84fad1091b9de401eb450aae66f1a741e";
+    kubePin.url = "github:nixos/nixpkgs/91a00709aebb3602f172a0bf47ba1ef013e34835";
 
     # Some helper methods...
     flakeUtils.url = "github:gytis-ivaskevicius/flake-utils-plus/v1.4.0";
