@@ -26,9 +26,12 @@
       };
     };
 
-    deploy.nodes.snowball.profiles.system = {
-      user = "root";
-      path = deploy-rs.lib.x86_64-linux.activate.nixos self.nixosConfigurations.snowball;
+    deploy.nodes.snowball = {
+      hostname = "snowball";
+      profiles.system = {
+        user = "root";
+        path = deploy-rs.lib.x86_64-linux.activate.nixos self.nixosConfigurations.snowball;
+      };
     };
 
     checks = builtins.mapAttrs (system: deployLib: deployLib.deployChecks self.deploy) deploy-rs.lib;
