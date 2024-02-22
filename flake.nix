@@ -15,7 +15,7 @@
       # Put modules common to all hosts here.
       commonModules = [
         ./modules/ocf/auth.nix
-        ./modules/ocf/desktop.nix
+        ./modules/ocf/de.nix
         ./modules/ocf/network.nix
         ./profiles/base.nix
       ];
