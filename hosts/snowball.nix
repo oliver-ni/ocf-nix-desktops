@@ -7,17 +7,10 @@
 
   networking.hostName = "snowball";
 
-  systemd.network.networks."10-wired" = {
-    matchConfig.Name = "enp8s0";
-    address = [
-      "169.229.226.99/24"
-      "2607:f140:8801::1:99/64"
-    ];
-    routes = [
-      { routeConfig.Gateway = "169.229.226.1"; }
-      { routeConfig.Gateway = "2607:f140:8801::1"; }
-    ];
-    linkConfig.RequiredForOnline = "routable";
+  ocf.network = {
+    enable = true;
+    interface = "enp8s0";
+    lastOctet = 99;
   };
 
   # This value determines the NixOS release from which the default
