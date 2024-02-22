@@ -8,6 +8,10 @@
 
   outputs = inputs@{ self, nixpkgs, flake-utils }:
     let
+      # ========================
+      # NixOS Host Configuration
+      # ========================
+
       # Put modules common to all hosts here.
       commonModules = [
         ./modules/ocf/auth.nix
@@ -20,7 +24,10 @@
         snowball = [ ./hosts/snowball.nix ./profiles/desktop.nix ];
       };
 
-      # Build comena config
+      # =====================
+      # Colmena Configuration
+      # =====================
+
       colmena = builtins.mapAttrs
         (host: modules: {
           imports = commonModules ++ modules;
@@ -29,25 +36,27 @@
         })
         hosts;
 
-      # Build dev shell config
-      devShells = flake-utils.lib.eachDefaultSystem
+      colmenaOutputs = {
+        colmena = colmena // {
+          meta = {
+            # This can be overriden by the system-specific configuration
+            nixpkgs = import nixpkgs { system = "x86_64-linux"; };
+          };
+        };
+      };
+
+      # =======================
+      # Dev Shell Configuration
+      # =======================
+
+      devShellOutputs = flake-utils.lib.eachDefaultSystem
         (system:
-          let pkgs = import nixpkgs { inherit system; };
-          in {
-            default = pkgs.mkShell {
+          let pkgs = import nixpkgs { inherit system; }; in {
+            devShells.default = pkgs.mkShell {
               packages = [ pkgs.colmena ];
             };
           }
         );
     in
-    {
-      inherit devShells;
-
-      colmena = colmena // {
-        meta = {
-          # This can be overriden by the system-specific configuration
-          nixpkgs = import nixpkgs { system = "x86_64-linux"; };
-        };
-      };
-    };
+    colmenaOutputs // devShellOutputs;
 }
