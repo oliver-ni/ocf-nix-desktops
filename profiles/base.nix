@@ -22,6 +22,7 @@
     "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIGlViRB5HH1bTaS1S7TcqVBSuxKdrbdhL2CmhDqc/t6A"
   ];
 
+  environment.enableAllTerminfo = true;
   environment.systemPackages = with pkgs; [
     bash
     zsh
