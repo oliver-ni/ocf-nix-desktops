@@ -2,17 +2,21 @@
 
 with lib;
 let
-  cfg = config.ocf.desktop;
+  cfg = config.ocf.de;
 in
 {
-  options.ocf.desktop = {
-    enable = mkEnableOption "Enable OCF desktop environment configuration";
+  options.ocf.de = {
+    enable = mkEnableOption "Enable desktop environment configuration";
   };
 
   config = mkIf cfg.enable {
     services.xserver = {
       enable = true;
+
+      # KDE is our primary DE, but have others available
       desktopManager.plasma5.enable = true;
+      desktopManager.gnome.enable = true;
+      desktopManager.xfce.enable = true;
 
       displayManager = {
         defaultSession = "plasmawayland";

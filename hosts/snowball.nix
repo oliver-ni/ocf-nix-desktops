@@ -9,7 +9,7 @@
 
   ocf = {
     auth.enable = true;
-    desktop.enable = true;
+    de.enable = true;
 
     network = {
       enable = true;
