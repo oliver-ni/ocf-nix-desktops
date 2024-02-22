@@ -9,7 +9,10 @@
   outputs = inputs@{ self, nixpkgs, flake-utils }:
     let
       # Put modules common to all hosts here.
-      commonModules = [ ./profiles/base.nix ];
+      commonModules = [
+        ./modules/ocf/network.nix
+        ./profiles/base.nix
+      ];
 
       # Put modules for specific hosts here.
       hosts = {
@@ -26,7 +29,7 @@
         hosts;
 
       # Build dev shell config
-      devShells = flake-utils.eachDefaultSystem
+      devShells = flake-utils.lib.eachDefaultSystem
         (system:
           let pkgs = import nixpkgs { inherit system; };
           in {
