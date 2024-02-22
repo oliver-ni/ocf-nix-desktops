@@ -15,13 +15,14 @@
       # Put modules common to all hosts here.
       commonModules = [
         ./modules/ocf/auth.nix
+        ./modules/ocf/desktop.nix
         ./modules/ocf/network.nix
         ./profiles/base.nix
       ];
 
       # Put modules for specific hosts here.
       hosts = {
-        snowball = [ ./hosts/snowball.nix ./profiles/desktop.nix ];
+        snowball = [ ./hosts/snowball.nix ];
       };
 
       # =====================
