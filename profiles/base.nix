@@ -4,8 +4,6 @@
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
 
-  networking.networkmanager.enable = true;
-
   time.timeZone = "America/Los_Angeles";
   i18n.defaultLocale = "en_US.UTF-8";
   i18n.extraLocaleSettings = {
@@ -23,11 +21,18 @@
   users.users.oliverni = {
     isNormalUser = true;
     description = "Oliver Ni";
-    extraGroups = [ "networkmanager" "wheel" ];
+    extraGroups = [ "wheel" ];
     openssh.authorizedKeys.keys = [
       "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIGlViRB5HH1bTaS1S7TcqVBSuxKdrbdhL2CmhDqc/t6A"
     ];
   };
+
+  security.sudo.extraRules = [
+    {
+      users = [ "oliverni" ];
+      commands = [{ command = "ALL"; options = [ "NOPASSWD" "SETENV" ]; }];
+    }
+  ];
 
   environment.systemPackages = with pkgs; [
     vim
