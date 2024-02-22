@@ -7,10 +7,14 @@
 
   networking.hostName = "snowball";
 
-  ocf.network = {
-    enable = true;
-    interface = "enp8s0";
-    lastOctet = 99;
+  ocf = {
+    auth.enable = true;
+
+    network = {
+      enable = true;
+      interface = "enp8s0";
+      lastOctet = 99;
+    };
   };
 
   # This value determines the NixOS release from which the default
