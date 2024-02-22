@@ -18,23 +18,16 @@
     LC_TIME = "en_US.UTF-8";
   };
 
-  users.users.oliverni = {
-    isNormalUser = true;
-    description = "Oliver Ni";
-    extraGroups = [ "wheel" ];
-    openssh.authorizedKeys.keys = [
-      "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIGlViRB5HH1bTaS1S7TcqVBSuxKdrbdhL2CmhDqc/t6A"
-    ];
-  };
-
-  security.sudo.extraRules = [
-    {
-      users = [ "oliverni" ];
-      commands = [{ command = "ALL"; options = [ "NOPASSWD" "SETENV" ]; }];
-    }
+  users.users.root.openssh.authorizedKeys.keys = [
+    "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIGlViRB5HH1bTaS1S7TcqVBSuxKdrbdhL2CmhDqc/t6A"
   ];
 
   environment.systemPackages = with pkgs; [
+    bash
+    zsh
+    fish
+    xonsh
+
     vim
     wget
     git
