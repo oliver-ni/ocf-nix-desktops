@@ -7,6 +7,12 @@
 
   networking.hostName = "snowball";
 
+  fileSystems."/home" = {
+    device = "none";
+    fsType = "tmpfs";
+    options = [ "size=8G" "mode=755" ];
+  };
+
   ocf = {
     auth.enable = true;
     de.enable = true;
