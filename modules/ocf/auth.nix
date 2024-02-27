@@ -42,8 +42,6 @@ in
         default_realm = "OCF.BERKELEY.EDU";
       };
     };
-
-    security.pam.services.systemd-user.makeHomeDir = true;
   };
 }
 
