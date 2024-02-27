@@ -31,6 +31,7 @@ in
           { routeConfig.Gateway = "169.229.226.1"; }
           { routeConfig.Gateway = "2607:f140:8801::1"; }
         ];
+        domains = [ "ocf.berkeley.edu" "ocf.io" ];
         linkConfig.RequiredForOnline = "routable";
       };
     };
