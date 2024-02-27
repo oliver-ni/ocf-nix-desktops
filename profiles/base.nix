@@ -1,6 +1,9 @@
 { config, pkgs, ... }:
 
 {
+  nix.settings.extra-experimental-features = [ "nix-command" "flakes" ];
+  nixpkgs.config.allowUnfree = true;
+
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
 
@@ -24,13 +27,38 @@
 
   environment.enableAllTerminfo = true;
   environment.systemPackages = with pkgs; [
+    # Shells
     bash
     zsh
     fish
     xonsh
 
+    # System utilities
+    dnsutils
+    cpufrequtils
+
+    # Languages
+    python3
+    poetry
+    ruby
+    elixir
+    clojure
+    ghc
+
+    # Editors
     vim
+    emacs
+    neovim
+    helix
+    kakoune
+
+    # Other tools
+    tmux
+    screen
     wget
+    curl
+    zip
+    unzip
     git
   ];
 
