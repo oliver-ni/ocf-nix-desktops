@@ -31,12 +31,12 @@ in
       enable = true;
 
       # KDE is our primary DE, but have others available
-      desktopManager.plasma5.enable = true;
+      desktopManager.plasma6.enable = true;
       desktopManager.gnome.enable = true;
       desktopManager.xfce.enable = true;
 
       displayManager = {
-        defaultSession = "plasmawayland";
+        defaultSession = "plasma";
 
         sddm = {
           enable = true;

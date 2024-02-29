@@ -25,21 +25,24 @@ in
       '';
     };
 
-    krb5 = {
+    security.krb5 = {
       enable = true;
-      kerberos = pkgs.heimdal;
-      realms = {
-        "OCF.BERKELEY.EDU" = {
-          admin_server = "kerberos.ocf.berkeley.edu";
-          kdc = [ "kerberos.ocf.berkeley.edu" ];
+      package = pkgs.heimdal;
+
+      settings = {
+        realms = {
+          "OCF.BERKELEY.EDU" = {
+            admin_server = "kerberos.ocf.berkeley.edu";
+            kdc = [ "kerberos.ocf.berkeley.edu" ];
+          };
         };
-      };
-      domain_realm = {
-        "ocf.berkeley.edu" = "OCF.BERKELEY.EDU";
-        ".ocf.berkeley.edu" = "OCF.BERKELEY.EDU";
-      };
-      libdefaults = {
-        default_realm = "OCF.BERKELEY.EDU";
+        domain_realm = {
+          "ocf.berkeley.edu" = "OCF.BERKELEY.EDU";
+          ".ocf.berkeley.edu" = "OCF.BERKELEY.EDU";
+        };
+        libdefaults = {
+          default_realm = "OCF.BERKELEY.EDU";
+        };
       };
     };
   };
