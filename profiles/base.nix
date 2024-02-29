@@ -36,6 +36,8 @@
     # System utilities
     dnsutils
     cpufrequtils
+    pkg-config
+    glib
 
     # Languages
     python3
@@ -44,6 +46,8 @@
     elixir
     clojure
     ghc
+    rustup
+    clang
 
     # Editors
     vim
@@ -64,6 +68,8 @@
 
   services.openssh.enable = true;
   services.fwupd.enable = true;
+  programs.nix-ld.enable = true;
+  networking.firewall.enable = false;
 
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions
