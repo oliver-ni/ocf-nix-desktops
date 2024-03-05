@@ -23,6 +23,7 @@
       # Put modules for specific hosts here.
       hosts = {
         snowball = [ ./hosts/snowball.nix ];
+        tornado = [ ./hosts/tornado.nix ];
       };
 
       # =====================
