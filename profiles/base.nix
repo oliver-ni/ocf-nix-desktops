@@ -36,8 +36,6 @@
     # System utilities
     dnsutils
     cpufrequtils
-    pkg-config
-    glib
 
     # Languages
     python3
@@ -68,6 +66,7 @@
 
   services.openssh.enable = true;
   services.fwupd.enable = true;
+  services.envfs.enable = true;
   programs.nix-ld.enable = true;
   networking.firewall.enable = false;
 
