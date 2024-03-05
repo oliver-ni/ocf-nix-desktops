@@ -64,10 +64,16 @@
     git
   ];
 
-  services.openssh.enable = true;
-  services.fwupd.enable = true;
-  services.envfs.enable = true;
-  programs.nix-ld.enable = true;
+  services = {
+    openssh.enable = true;
+    fwupd.enable = true;
+    envfs.enable = true;
+  };
+
+  programs = {
+    nix-ld.enable = true;
+  };
+
   networking.firewall.enable = false;
 
   # This value determines the NixOS release from which the default
