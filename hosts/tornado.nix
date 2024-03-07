@@ -17,6 +17,8 @@
     };
   };
 
+  fonts.packages = [ pkgs.helvetica-neue-lt-std ];
+
   services.cage = {
     enable = true;
     program = "${pkgs.chromium}/bin/chromium --noerrdialogs --disable-infobars --kiosk https://labmap.ocf.berkeley.edu";
