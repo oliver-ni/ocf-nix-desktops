@@ -10,22 +10,35 @@ in
   };
 
   config = mkIf cfg.enable {
-    environment.etc = {
-      skel.source = ./de/skel;
-      "ocf/assets".source = ./de/assets;
-    };
-
     security.pam = {
       services.systemd-user.makeHomeDir = true;
       makeHomeDir.skelDirectory = "/etc/skel";
     };
+
+    environment.etc = {
+      skel.source = ./de/skel;
+      "ocf/assets".source = ./de/assets;
+      "p10k.zsh".source = ./de/p10k.zsh;
+    };
+
+    programs.zsh.shellInit = ''
+      if [[ ! -f ~/.zshrc ]]; then
+        source ${pkgs.zsh-powerlevel10k}/share/zsh-powerlevel10k/powerlevel10k.zsh-theme
+        source /etc/p10k.zsh
+      fi
+      zsh-newuser-install() { :; }
+    '';
 
     environment.systemPackages = with pkgs; [
       google-chrome
       firefox
       libreoffice
       vscode-fhs
+      zsh-powerlevel10k
+      kitty
     ];
+
+    fonts.packages = [ pkgs.meslo-lgs-nf ];
 
     services.xserver = {
       enable = true;
