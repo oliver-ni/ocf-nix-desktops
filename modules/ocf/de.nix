@@ -41,6 +41,7 @@ in
         sddm = {
           enable = true;
           theme = "breeze";
+          wayland.enable = true;
           settings.Users = {
             RememberLastUser = false;
             RememberLastSession = false;
@@ -51,6 +52,17 @@ in
       xkb = {
         layout = "us";
         variant = "";
+      };
+    };
+
+    systemd.user.services.wayout = {
+      description = "Automatic idle logout manager";
+      wantedBy = [ "graphical-session.target" ];
+      after = [ "graphical-session.target" ];
+      serviceConfig = {
+        ExecStart = "${pkgs.ocf.wayout}/bin/wayout";
+        Type = "simple";
+        Restart = "on-failure";
       };
     };
 
