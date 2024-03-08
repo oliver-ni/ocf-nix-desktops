@@ -4,8 +4,14 @@
   nix.settings.extra-experimental-features = [ "nix-command" "flakes" ];
   nixpkgs.config.allowUnfree = true;
 
-  boot.loader.systemd-boot.enable = true;
-  boot.loader.efi.canTouchEfiVariables = true;
+  boot.loader = {
+    systemd-boot = {
+      enable = true;
+      consoleMode = "max";
+    };
+
+    efi.canTouchEfiVariables = true;
+  };
 
   time.timeZone = "America/Los_Angeles";
   i18n.defaultLocale = "en_US.UTF-8";
@@ -65,12 +71,27 @@
   ];
 
   services = {
-    openssh.enable = true;
+    openssh = {
+      enable = true;
+      settings.X11Forwarding = true;
+    };
+
     fwupd.enable = true;
-    envfs.enable = true;
+    envfs = {
+      enable = true;
+      extraFallbackPathCommands = ''
+        ln -s ${pkgs.bash}/bin/bash $out/bash
+        ln -s ${pkgs.zsh}/bin/zsh $out/zsh
+        ln -s ${pkgs.fish}/bin/fish $out/fish
+        ln -s ${pkgs.xonsh}/bin/xonsh $out/xonsh
+      '';
+    };
   };
 
   programs = {
+    zsh.enable = true;
+    fish.enable = true;
+    xonsh.enable = true;
     nix-ld.enable = true;
   };
 
