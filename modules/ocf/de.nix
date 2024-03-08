@@ -18,13 +18,13 @@ in
     environment.etc = {
       skel.source = ./de/skel;
       "ocf/assets".source = ./de/assets;
-      ".p10k.zsh".source = ./de/.p10k.zsh;
+      "p10k.zsh".source = ./de/p10k.zsh;
     };
 
     programs.zsh.shellInit = ''
       if [[ ! -f ~/.zshrc ]]; then
         source ${pkgs.zsh-powerlevel10k}/share/zsh-powerlevel10k/powerlevel10k.zsh-theme
-        source /etc/.p10k.zsh
+        source /etc/p10k.zsh
       fi
       zsh-newuser-install() { :; }
     '';
