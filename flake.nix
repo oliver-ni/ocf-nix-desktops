@@ -4,9 +4,10 @@
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/master";
     flake-utils.url = "github:numtide/flake-utils";
+    wayout.url = "github:ocf/wayout";
   };
 
-  outputs = inputs@{ self, nixpkgs, flake-utils }:
+  outputs = { self, nixpkgs, flake-utils, wayout }:
     let
       # ========================
       # NixOS Host Configuration
@@ -42,7 +43,10 @@
         colmena = colmena // {
           meta = {
             # This can be overriden by the system-specific configuration
-            nixpkgs = import nixpkgs { system = "x86_64-linux"; };
+            nixpkgs = import nixpkgs {
+              system = "x86_64-linux";
+              overlays = [ (final: prev: { ocf.wayout = wayout.packages.x86_64-linux.default; }) ];
+            };
           };
         };
       };
