@@ -61,6 +61,7 @@
     kakoune
 
     # Other tools
+    rsync
     tmux
     screen
     wget
