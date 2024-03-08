@@ -25,6 +25,34 @@ in
       '';
     };
 
+    security.sudo = {
+      extraConfig = ''
+        Defaults passprompt="[sudo] password for %u/root: "
+      '';
+
+      extraRules = [
+        { groups = [ "ocfroot" ]; commands = [ "ALL" ]; }
+        { users = [ "ocfbackups" ]; commands = [{ command = "${pkgs.rsync}/bin/rsync"; options = [ "NOPASSWD" ]; }]; }
+      ];
+    };
+
+    security.pam.services.sudo.text =
+      let pam_krb5_so = "${pkgs.pam_krb5}/lib/security/pam_krb5.so"; in ''
+        # use /root principal to sudo
+        auth required ${pam_krb5_so} minimum_uid=1000 alt_auth_map=%s/root only_alt_auth no_ccache
+        account required pam_unix.so
+
+        # common-session-noninteractive
+        session [default=1] pam_permit.so
+        session requisite pam_deny.so
+        session required pam_permit.so
+        session optional ${pam_krb5_so} minimum_uid=1000
+        session required pam_unix.so
+
+        # reset user limits
+        session required pam_limits.so
+      '';
+
     security.krb5 = {
       enable = true;
       package = pkgs.heimdal;
