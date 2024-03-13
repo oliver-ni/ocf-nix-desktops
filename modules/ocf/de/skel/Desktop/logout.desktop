@@ -1,5 +1,5 @@
 [Desktop Entry]
 Name=Log Out
-Exec=qdbus org.kde.ksmserver /KSMServer logout 1 0 -1
+Exec=busctl --user call org.kde.LogoutPrompt /LogoutPrompt org.kde.LogoutPrompt promptLogout
 Icon=system-log-out
 Type=Application

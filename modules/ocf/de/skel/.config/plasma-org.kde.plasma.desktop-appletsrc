@@ -157,7 +157,7 @@ plugin=org.kde.plasma.icontasks
 PreloadWeight=42
 
 [Containments][2][Applets][5][Configuration][General]
-launchers=applications:google-chrome.desktop,applications:firefox.desktop,preferred://filemanager,applications:org.kde.konsole.desktop
+launchers=applications:google-chrome.desktop,applications:firefox.desktop,applications:dolphin.desktop,applications:org.kde.konsole.desktop
 
 [Containments][2][Applets][6]
 immutability=1
@@ -171,7 +171,7 @@ SystrayContainmentId=7
 PreloadWeight=42
 
 [Containments][2][General]
-AppletOrder=3;31;4;5;6;13;32;17
+AppletOrder=3;27;31;4;5;16;6;13;32;30;17
 
 [Containments][7]
 activityId=
@@ -203,54 +203,12 @@ plugin=org.kde.plasma.notifications
 [Containments][7][Applets][12][Configuration]
 PreloadWeight=42
 
-[Containments][7][Applets][33]
-immutability=1
-plugin=org.kde.plasma.manage-inputmethod
-
-[Containments][7][Applets][34]
-immutability=1
-plugin=org.kde.kscreen
-
-[Containments][7][Applets][35]
-immutability=1
-plugin=org.kde.plasma.printmanager
-
-[Containments][7][Applets][36]
-immutability=1
-plugin=org.kde.plasma.keyboardindicator
-
-[Containments][7][Applets][37]
-immutability=1
-plugin=org.kde.plasma.keyboardlayout
-
-[Containments][7][Applets][38]
-immutability=1
-plugin=org.kde.plasma.nightcolorcontrol
-
-[Containments][7][Applets][39]
-immutability=1
-plugin=org.kde.plasma.networkmanagement
-
-[Containments][7][Applets][40]
-immutability=1
-plugin=org.kde.plasma.bluetooth
-
-[Containments][7][Applets][41]
-immutability=1
-plugin=org.kde.plasma.battery
-
-[Containments][7][Applets][41][Configuration]
-PreloadWeight=42
-
 [Containments][7][Applets][8]
 immutability=1
 plugin=org.kde.plasma.volume
 
 [Containments][7][Applets][8][Configuration]
 PreloadWeight=42
-
-[Containments][7][Applets][8][Configuration][General]
-migrated=true
 
 [Containments][7][Applets][9]
 immutability=1
@@ -263,9 +221,9 @@ PreloadWeight=42
 PreloadWeight=42
 
 [Containments][7][General]
-extraItems=org.kde.plasma.battery,org.kde.plasma.clipboard,org.kde.plasma.devicenotifier,org.kde.plasma.bluetooth,org.kde.plasma.mediacontroller,org.kde.plasma.volume,org.kde.plasma.notifications,org.kde.plasma.manage-inputmethod,org.kde.kscreen,org.kde.plasma.nightcolorcontrol,org.kde.plasma.printmanager,org.kde.plasma.keyboardindicator,org.kde.plasma.keyboardlayout,org.kde.plasma.networkmanagement
-knownItems=org.kde.plasma.battery,org.kde.plasma.clipboard,org.kde.plasma.devicenotifier,org.kde.plasma.bluetooth,org.kde.plasma.mediacontroller,org.kde.plasma.volume,org.kde.plasma.notifications,org.kde.plasma.manage-inputmethod,org.kde.kscreen,org.kde.plasma.nightcolorcontrol,org.kde.plasma.printmanager,org.kde.plasma.keyboardindicator,org.kde.plasma.keyboardlayout,org.kde.plasma.networkmanagement
+extraItems=org.kde.plasma.battery,org.kde.plasma.clipboard,org.kde.plasma.devicenotifier,org.kde.plasma.bluetooth,org.kde.kupapplet,org.kde.plasma.mediacontroller,org.kde.plasma.volume,org.kde.kdeconnect,org.kde.plasma.notifications
+knownItems=org.kde.plasma.battery,org.kde.plasma.clipboard,org.kde.plasma.devicenotifier,org.kde.plasma.bluetooth,org.kde.kupapplet,org.kde.plasma.mediacontroller,org.kde.plasma.volume,org.kde.kdeconnect,org.kde.plasma.notifications
 
 [ScreenMapping]
 itemsOnDisabledScreens=
-screenMapping=desktop:/terminal.desktop,0,11dd73e5-f134-40c8-8963-071a64c4fad2,desktop:/libreoffice.desktop,0,desktop:/terminal.desktop,desktop:/logout.desktop,0,11dd73e5-f134-40c8-8963-071a64c4fad2,desktop:/firefox.desktop,0,11dd73e5-f134-40c8-8963-071a64c4fad2,desktop:/scanner.desktop,0,11dd73e5-f134-40c8-8963-071a64c4fad2,desktop:/sftp.desktop,0,11dd73e5-f134-40c8-8963-071a64c4fad2,desktop:/print-queue.desktop,0,11dd73e5-f134-40c8-8963-071a64c4fad2,file:///home/o/ol/oliverni/0,0,0,desktop:/remote-terminal.desktop,0,11dd73e5-f134-40c8-8963-071a64c4fad2,desktop:/chrome.desktop,0,11dd73e5-f134-40c8-8963-071a64c4fad2,desktop:/libreoffice.desktop,0,11dd73e5-f134-40c8-8963-071a64c4fad2,desktop:/logout.desktop,0,desktop:/writer.desktop,desktop:/remote-terminal.desktop,0,desktop:/chrome.desktop,desktop:/writer.desktop,0,11dd73e5-f134-40c8-8963-071a64c4fad2
+screenMapping=desktop:/remote-terminal.desktop,0,desktop:/chrome.desktop,0,desktop:/firefox.desktop,0,desktop:/libreoffice.desktop,0,desktop:/terminal.desktop,0,desktop:/sftp.desktop,0,desktop:/logout.desktop,0,desktop:/writer.desktop,0,desktop:/print-queue.desktop,0
