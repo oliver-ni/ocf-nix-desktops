@@ -3,6 +3,16 @@
 with lib;
 let
   cfg = config.ocf.de;
+  plasma-applet-commandoutput = pkgs.fetchFromGitHub {
+    owner = "Zren";
+    repo = "plasma-applet-commandoutput";
+    rev = "7e90654db81ad1088f811d9ad60b355aae956b0c";
+    sha256 = "sha256-gec2xOWUB1dB7RCLLBmoPGRn8Ki+oo/o2WHwsKcoElw=";
+    postFetch = ''
+      mkdir -p $out/share/plasma/plasmoids
+      mv $out/package $out/share/plasma/plasmoids/com.github.zren.commandoutput
+    '';
+  };
 in
 {
   options.ocf.de = {
@@ -30,6 +40,7 @@ in
     '';
 
     environment.systemPackages = with pkgs; [
+      plasma-applet-commandoutput
       google-chrome
       firefox
       libreoffice

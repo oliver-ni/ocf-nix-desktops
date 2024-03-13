@@ -69,6 +69,9 @@ plugin=org.kde.plasma.digitalclock
 [Containments][2][Applets][13][Configuration]
 PreloadWeight=42
 
+[Containments][2][Applets][13][Configuration][Appearance]
+fontWeight=400
+
 [Containments][2][Applets][16]
 immutability=1
 plugin=com.github.zren.commandoutput
@@ -104,6 +107,8 @@ plugin=org.kde.plasma.kickoff
 
 [Containments][2][Applets][3][Configuration]
 PreloadWeight=100
+popupHeight=510
+popupWidth=647
 
 [Containments][2][Applets][3][Configuration][General]
 favoritesPortedToKAstats=true
@@ -121,7 +126,7 @@ immutability=1
 plugin=com.github.zren.commandoutput
 
 [Containments][2][Applets][30][Configuration][General]
-clickCommand=qdbus org.kde.ksmserver /KSMServer logout 1 0 -1
+clickCommand=busctl --user call org.kde.LogoutPrompt /LogoutPrompt org.kde.LogoutPrompt promptLogout
 command=echo "log out"
 fontSize=22
 interval=600000
@@ -157,21 +162,21 @@ plugin=org.kde.plasma.icontasks
 PreloadWeight=42
 
 [Containments][2][Applets][5][Configuration][General]
-launchers=applications:google-chrome.desktop,applications:firefox.desktop,preferred://filemanager,applications:org.kde.konsole.desktop
+launchers=applications:google-chrome.desktop,applications:firefox.desktop,applications:org.kde.dolphin.desktop,applications:org.kde.konsole.desktop
 
 [Containments][2][Applets][6]
 immutability=1
 plugin=org.kde.plasma.systemtray
 
 [Containments][2][Applets][6][Configuration]
-PreloadWeight=47
+PreloadWeight=52
 SystrayContainmentId=7
 
 [Containments][2][Configuration]
 PreloadWeight=42
 
 [Containments][2][General]
-AppletOrder=3;31;4;5;6;13;32;17
+AppletOrder=3;27;31;4;5;16;6;13;32;30;17
 
 [Containments][7]
 activityId=
@@ -180,6 +185,8 @@ immutability=1
 lastScreen=0
 location=4
 plugin=org.kde.plasma.private.systemtray
+popupHeight=432
+popupWidth=432
 wallpaperplugin=org.kde.image
 
 [Containments][7][Applets][10]
@@ -209,27 +216,30 @@ plugin=org.kde.plasma.manage-inputmethod
 
 [Containments][7][Applets][34]
 immutability=1
-plugin=org.kde.kscreen
+plugin=org.kde.plasma.cameraindicator
 
 [Containments][7][Applets][35]
 immutability=1
-plugin=org.kde.plasma.printmanager
+plugin=org.kde.kscreen
 
 [Containments][7][Applets][36]
 immutability=1
-plugin=org.kde.plasma.keyboardindicator
+plugin=org.kde.plasma.printmanager
 
 [Containments][7][Applets][37]
 immutability=1
-plugin=org.kde.plasma.keyboardlayout
+plugin=org.kde.plasma.keyboardindicator
 
 [Containments][7][Applets][38]
 immutability=1
-plugin=org.kde.plasma.nightcolorcontrol
+plugin=org.kde.plasma.keyboardlayout
 
 [Containments][7][Applets][39]
 immutability=1
 plugin=org.kde.plasma.networkmanagement
+
+[Containments][7][Applets][39][Configuration]
+PreloadWeight=55
 
 [Containments][7][Applets][40]
 immutability=1
@@ -240,6 +250,13 @@ immutability=1
 plugin=org.kde.plasma.battery
 
 [Containments][7][Applets][41][Configuration]
+PreloadWeight=42
+
+[Containments][7][Applets][42]
+immutability=1
+plugin=org.kde.plasma.brightness
+
+[Containments][7][Applets][42][Configuration]
 PreloadWeight=42
 
 [Containments][7][Applets][8]
@@ -263,9 +280,9 @@ PreloadWeight=42
 PreloadWeight=42
 
 [Containments][7][General]
-extraItems=org.kde.plasma.battery,org.kde.plasma.clipboard,org.kde.plasma.devicenotifier,org.kde.plasma.bluetooth,org.kde.plasma.mediacontroller,org.kde.plasma.volume,org.kde.plasma.notifications,org.kde.plasma.manage-inputmethod,org.kde.kscreen,org.kde.plasma.nightcolorcontrol,org.kde.plasma.printmanager,org.kde.plasma.keyboardindicator,org.kde.plasma.keyboardlayout,org.kde.plasma.networkmanagement
-knownItems=org.kde.plasma.battery,org.kde.plasma.clipboard,org.kde.plasma.devicenotifier,org.kde.plasma.bluetooth,org.kde.plasma.mediacontroller,org.kde.plasma.volume,org.kde.plasma.notifications,org.kde.plasma.manage-inputmethod,org.kde.kscreen,org.kde.plasma.nightcolorcontrol,org.kde.plasma.printmanager,org.kde.plasma.keyboardindicator,org.kde.plasma.keyboardlayout,org.kde.plasma.networkmanagement
+extraItems=org.kde.plasma.battery,org.kde.plasma.clipboard,org.kde.plasma.devicenotifier,org.kde.plasma.bluetooth,org.kde.plasma.mediacontroller,org.kde.plasma.volume,org.kde.plasma.notifications,org.kde.plasma.brightness,org.kde.plasma.manage-inputmethod,org.kde.plasma.cameraindicator,org.kde.kscreen,org.kde.plasma.printmanager,org.kde.plasma.keyboardindicator,org.kde.plasma.keyboardlayout,org.kde.plasma.networkmanagement
+knownItems=org.kde.plasma.battery,org.kde.plasma.clipboard,org.kde.plasma.devicenotifier,org.kde.plasma.bluetooth,org.kde.plasma.mediacontroller,org.kde.plasma.volume,org.kde.plasma.notifications,org.kde.plasma.brightness,org.kde.plasma.manage-inputmethod,org.kde.plasma.cameraindicator,org.kde.kscreen,org.kde.plasma.printmanager,org.kde.plasma.keyboardindicator,org.kde.plasma.keyboardlayout,org.kde.plasma.networkmanagement
 
 [ScreenMapping]
 itemsOnDisabledScreens=
-screenMapping=desktop:/terminal.desktop,0,11dd73e5-f134-40c8-8963-071a64c4fad2,desktop:/libreoffice.desktop,0,desktop:/terminal.desktop,desktop:/logout.desktop,0,11dd73e5-f134-40c8-8963-071a64c4fad2,desktop:/firefox.desktop,0,11dd73e5-f134-40c8-8963-071a64c4fad2,desktop:/scanner.desktop,0,11dd73e5-f134-40c8-8963-071a64c4fad2,desktop:/sftp.desktop,0,11dd73e5-f134-40c8-8963-071a64c4fad2,desktop:/print-queue.desktop,0,11dd73e5-f134-40c8-8963-071a64c4fad2,file:///home/o/ol/oliverni/0,0,0,desktop:/remote-terminal.desktop,0,11dd73e5-f134-40c8-8963-071a64c4fad2,desktop:/chrome.desktop,0,11dd73e5-f134-40c8-8963-071a64c4fad2,desktop:/libreoffice.desktop,0,11dd73e5-f134-40c8-8963-071a64c4fad2,desktop:/logout.desktop,0,desktop:/writer.desktop,desktop:/remote-terminal.desktop,0,desktop:/chrome.desktop,desktop:/writer.desktop,0,11dd73e5-f134-40c8-8963-071a64c4fad2
+screenMapping=desktop:/remote-terminal.desktop,0,desktop:/chrome.desktop,desktop:/libreoffice.desktop,0,11dd73e5-f134-40c8-8963-071a64c4fad2,desktop:/logout.desktop,0,11dd73e5-f134-40c8-8963-071a64c4fad2,desktop:/libreoffice.desktop,0,desktop:/terminal.desktop,desktop:/terminal.desktop,0,11dd73e5-f134-40c8-8963-071a64c4fad2,http://0.0.0.0,0,0,desktop:/writer.desktop,0,11dd73e5-f134-40c8-8963-071a64c4fad2,desktop:/firefox.desktop,0,11dd73e5-f134-40c8-8963-071a64c4fad2,desktop:/remote-terminal.desktop,0,11dd73e5-f134-40c8-8963-071a64c4fad2,desktop:/print-queue.desktop,0,11dd73e5-f134-40c8-8963-071a64c4fad2,desktop:/scanner.desktop,0,11dd73e5-f134-40c8-8963-071a64c4fad2,desktop:/logout.desktop,0,desktop:/writer.desktop,desktop:/chrome.desktop,0,11dd73e5-f134-40c8-8963-071a64c4fad2,desktop:/sftp.desktop,0,11dd73e5-f134-40c8-8963-071a64c4fad2
