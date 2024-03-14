@@ -112,7 +112,7 @@ popupWidth=647
 
 [Containments][2][Applets][3][Configuration][General]
 favoritesPortedToKAstats=true
-icon=/etc/ocf/assets/images/penguin-swing.svg
+icon=/etc/ocf/assets/images/penguin.svg
 menuItems=bookmark:t,application:t,computer:t,oftenUsed:f,used:f,leave:f
 
 [Containments][2][Applets][3][Configuration][Shortcuts]
