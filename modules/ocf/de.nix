@@ -35,7 +35,7 @@ in
         themeConfig.General = {
           FontSize = 12;
           Background = "/etc/ocf/assets/images/login.png";
-          Logo = "/etc/ocf/assets/images/penguin-swing.svg";
+          Logo = "/etc/ocf/assets/images/penguin.svg";
           CustomBackground = true;
         };
       })
