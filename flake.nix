@@ -9,6 +9,21 @@
 
   outputs = { self, nixpkgs, flake-utils, wayout }:
     let
+      # ================
+      # nixpkgs overlays
+      # ================
+
+      pkgs-x86_64-linux = import nixpkgs {
+        system = "x86_64-linux";
+        overlays = [
+          (final: prev: {
+            ocf.wayout = wayout.packages.x86_64-linux.default;
+            ocf.plasma-applet-commandoutput = prev.callPackage ./pkgs/plasma-applet-commandoutput.nix { };
+            ocf.catppuccin-sddm = prev.qt6Packages.callPackage ./pkgs/catppuccin-sddm.nix { };
+          })
+        ];
+      };
+
       # ========================
       # NixOS Host Configuration
       # ========================
@@ -41,13 +56,7 @@
 
       colmenaOutputs = {
         colmena = colmena // {
-          meta = {
-            # This can be overriden by the system-specific configuration
-            nixpkgs = import nixpkgs {
-              system = "x86_64-linux";
-              overlays = [ (final: prev: { ocf.wayout = wayout.packages.x86_64-linux.default; }) ];
-            };
-          };
+          meta = { nixpkgs = pkgs-x86_64-linux; };
         };
       };
 
