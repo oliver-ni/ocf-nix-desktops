@@ -3,16 +3,6 @@
 with lib;
 let
   cfg = config.ocf.de;
-  plasma-applet-commandoutput = pkgs.fetchFromGitHub {
-    owner = "Zren";
-    repo = "plasma-applet-commandoutput";
-    rev = "7e90654db81ad1088f811d9ad60b355aae956b0c";
-    sha256 = "sha256-gec2xOWUB1dB7RCLLBmoPGRn8Ki+oo/o2WHwsKcoElw=";
-    postFetch = ''
-      mkdir -p $out/share/plasma/plasmoids
-      mv $out/package $out/share/plasma/plasmoids/com.github.zren.commandoutput
-    '';
-  };
 in
 {
   options.ocf.de = {
@@ -40,7 +30,15 @@ in
     '';
 
     environment.systemPackages = with pkgs; [
-      plasma-applet-commandoutput
+      pkgs.ocf.plasma-applet-commandoutput
+      (pkgs.ocf.catppuccin-sddm.override {
+        themeConfig.General = {
+          FontSize = 12;
+          Background = "/etc/ocf/assets/images/login.png";
+          Logo = "/etc/ocf/assets/images/penguin-swing.svg";
+          CustomBackground = true;
+        };
+      })
       google-chrome
       firefox
       libreoffice
@@ -64,7 +62,7 @@ in
 
         sddm = {
           enable = true;
-          theme = "breeze";
+          theme = "catppuccin-latte";
           wayland.enable = true;
           settings.Users = {
             RememberLastUser = false;
