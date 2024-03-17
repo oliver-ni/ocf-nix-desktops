@@ -64,6 +64,7 @@
     kakoune
 
     # Other tools
+    ocf.utils
     rsync
     tmux
     screen

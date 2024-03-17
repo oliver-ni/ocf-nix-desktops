@@ -6,15 +6,17 @@
     flake-utils.url = "github:numtide/flake-utils";
     ocflib.url = "github:ocf/ocflib";
     ocf-sync-etc.url = "github:ocf/etc";
-
+    ocf-utils = {
+      url = "github:ocf/utils";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     wayout = {
       url = "github:ocf/wayout";
       inputs.nixpkgs.follows = "nixpkgs";
-      inputs.flake-utils.follows = "flake-utils";
     };
   };
 
-  outputs = { self, nixpkgs, flake-utils, ocflib, ocf-sync-etc, wayout }:
+  outputs = { self, nixpkgs, flake-utils, ocflib, ocf-sync-etc, ocf-utils, wayout }:
     let
       # ================
       # nixpkgs overlays
@@ -26,6 +28,7 @@
           ocflib.overlays.default
           ocf-sync-etc.overlays.default
           (final: prev: {
+            ocf.utils = ocf-utils.packages.x86_64-linux.default;
             ocf.wayout = wayout.packages.x86_64-linux.default;
             ocf.plasma-applet-commandoutput = prev.callPackage ./pkgs/plasma-applet-commandoutput.nix { };
             ocf.catppuccin-sddm = prev.qt6Packages.callPackage ./pkgs/catppuccin-sddm.nix { };
