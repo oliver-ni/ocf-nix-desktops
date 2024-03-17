@@ -17,7 +17,7 @@ in
 
     environment.etc = {
       skel.source = ./de/skel;
-      "ocf/assets".source = ./de/assets;
+      "ocf-assets".source = ./de/assets;
       "p10k.zsh".source = ./de/p10k.zsh;
     };
 
@@ -34,8 +34,8 @@ in
       (pkgs.ocf.catppuccin-sddm.override {
         themeConfig.General = {
           FontSize = 12;
-          Background = "/etc/ocf/assets/images/login.png";
-          Logo = "/etc/ocf/assets/images/penguin.svg";
+          Background = "/etc/ocf-assets/images/login.png";
+          Logo = "/etc/ocf-assets/images/penguin.svg";
           CustomBackground = true;
         };
       })
