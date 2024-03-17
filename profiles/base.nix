@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ pkgs, ... }:
 
 {
   nix.settings.extra-experimental-features = [ "nix-command" "flakes" ];
@@ -47,7 +47,7 @@
     pulseaudio
 
     # Languages
-    python3
+    (python3.withPackages (ps: [ ps.ocflib ]))
     poetry
     ruby
     elixir
