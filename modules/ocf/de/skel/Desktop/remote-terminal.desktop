@@ -2,4 +2,4 @@
 Type=Application
 Name=Remote Terminal
 Exec=x-terminal-emulator -e "ssh -Kt tsunami"
-Icon=/etc/ocf/assets/icons/ssh-terminal.png
+Icon=/etc/ocf-assets/icons/ssh-terminal.png
