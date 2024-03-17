@@ -113,6 +113,29 @@
 
   networking.firewall.enable = false;
 
+  # Instead of populating /etc/ocf using `environment.etc`, we use a systemd
+  # service to pull the repository every 15 minutes. This allows us to keep
+  # the repository up to date without needing to update the NixOS config.
+  systemd = {
+    services.sync-etc = {
+      description = "Update OCF etc repository";
+      serviceConfig = {
+        Type = "oneshot";
+        ExecStart = "${pkgs.ocf-sync-etc}/bin/sync-etc /etc/ocf";
+      };
+    };
+
+    timers.sync-etc = {
+      description = "Update OCF etc repository";
+      wantedBy = [ "timers.target" ];
+      timerConfig = {
+        OnCalendar = "*:0/15";
+        RandomizedDelaySec = "15m";
+        FixedRandomDelay = true;
+      };
+    };
+  };
+
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions
   # on your system were taken. It‘s perfectly fine and recommended to leave
