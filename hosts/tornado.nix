@@ -19,6 +19,24 @@
 
   fonts.packages = [ pkgs.helvetica-neue-lt-std ];
 
+  security.pam.services.systemd-user.makeHomeDir = true;
+  security.rtkit.enable = true;
+
+  services = {
+    avahi.publish = {
+      enable = true;
+      userServices = true;
+      domain = true;
+      addresses = true;
+      hinfo = true;
+    };
+
+    pipewire.extraConfig.pipewire-pulse."100-network-audio-sink"."pulse.cmd" = [
+      { cmd = "load-module"; args = "module-native-protocol-tcp auth-ip-acl=169.229.226.0/24 auth-anonymous=1"; }
+      { cmd = "load-module"; args = "module-zeroconf-publish"; }
+    ];
+  };
+
   services.cage = {
     enable = true;
     program = "${pkgs.chromium}/bin/chromium --noerrdialogs --disable-infobars --kiosk https://labmap.ocf.berkeley.edu";
