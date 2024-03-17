@@ -4,6 +4,8 @@
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
     flake-utils.url = "github:numtide/flake-utils";
+    ocflib.url = "github:ocf/ocflib";
+
     wayout = {
       url = "github:ocf/wayout";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -11,7 +13,7 @@
     };
   };
 
-  outputs = { self, nixpkgs, flake-utils, wayout }:
+  outputs = { self, nixpkgs, flake-utils, ocflib, wayout }:
     let
       # ================
       # nixpkgs overlays
@@ -20,6 +22,7 @@
       pkgs-x86_64-linux = import nixpkgs {
         system = "x86_64-linux";
         overlays = [
+          ocflib.overlays.default
           (final: prev: {
             ocf.wayout = wayout.packages.x86_64-linux.default;
             ocf.plasma-applet-commandoutput = prev.callPackage ./pkgs/plasma-applet-commandoutput.nix { };

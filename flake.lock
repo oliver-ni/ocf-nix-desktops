@@ -78,10 +78,26 @@
         "type": "github"
       }
     },
+    "ocflib": {
+      "locked": {
+        "lastModified": 1710569455,
+        "narHash": "sha256-WR6r49o59WgbhPe2hc/o8UJJ37zIiHaxwweOUkqxbkw=",
+        "owner": "ocf",
+        "repo": "ocflib",
+        "rev": "8adef7eb1a096796796e04cc0f28e1af5651231e",
+        "type": "github"
+      },
+      "original": {
+        "owner": "ocf",
+        "repo": "ocflib",
+        "type": "github"
+      }
+    },
     "root": {
       "inputs": {
         "flake-utils": "flake-utils",
         "nixpkgs": "nixpkgs",
+        "ocflib": "ocflib",
         "wayout": "wayout"
       }
     },
