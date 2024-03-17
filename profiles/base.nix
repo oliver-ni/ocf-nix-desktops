@@ -44,6 +44,7 @@
     # System utilities
     dnsutils
     cpufrequtils
+    pulseaudio
 
     # Languages
     python3
@@ -79,7 +80,6 @@
       settings.X11Forwarding = true;
     };
 
-    fwupd.enable = true;
     envfs = {
       enable = true;
       extraFallbackPathCommands = ''
@@ -89,7 +89,20 @@
         ln -s ${pkgs.xonsh}/bin/xonsh $out/xonsh
       '';
     };
+
+    pipewire = {
+      enable = true;
+      pulse.enable = true;
+      jack.enable = true;
+      alsa.enable = true;
+    };
+
+    fwupd.enable = true;
+    avahi.enable = true;
   };
+
+  security.rtkit.enable = true;
+  hardware.pulseaudio.enable = false;
 
   programs = {
     zsh.enable = true;
