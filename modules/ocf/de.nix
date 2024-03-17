@@ -21,6 +21,8 @@ in
       "p10k.zsh".source = ./de/p10k.zsh;
     };
 
+    programs.steam.enable = true;
+
     programs.zsh.shellInit = ''
       if [[ ! -f ~/.zshrc ]]; then
         source ${pkgs.zsh-powerlevel10k}/share/zsh-powerlevel10k/powerlevel10k.zsh-theme
