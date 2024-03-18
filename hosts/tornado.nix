@@ -1,8 +1,8 @@
-{ config, pkgs, ... }:
+{ pkgs, ... }:
 
 {
   imports = [
-    ../hardware/nuc.nix
+    ../hardware/minisforum-new.nix
   ];
 
   networking.hostName = "tornado";
@@ -12,7 +12,7 @@
 
     network = {
       enable = true;
-      interface = "enp89s0";
+      interface = "eno1";
       lastOctet = 90;
     };
   };
@@ -43,10 +43,17 @@
     user = "ocftv";
   };
 
-  systemd.services."cage-tty1".after = [
-    "network-online.target"
-    "systemd-resolved.service"
-  ];
+  systemd = {
+    user.services = {
+      pipewire.wantedBy = [ "default.target" ];
+      pipewire-pulse.wantedBy = [ "default.target" ];
+    };
+
+    services."cage-tty1".after = [
+      "network-online.target"
+      "systemd-resolved.service"
+    ];
+  };
 
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions
