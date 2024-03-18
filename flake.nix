@@ -63,6 +63,7 @@
           imports = commonModules ++ modules;
           deployment.buildOnTarget = true;
           deployment.targetUser = "root";
+          deployment.allowLocalDeployment = true;
         })
         hosts;
 
