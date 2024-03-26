@@ -73,6 +73,7 @@
     zip
     unzip
     git
+    cups
   ];
 
   services = {
@@ -113,6 +114,15 @@
   };
 
   networking.firewall.enable = false;
+
+  environment.etc = {
+    papersize.text = "letter";
+    "cups/lpoptions".text = "Default double";
+    "cups/client.conf".text = ''
+      ServerName printhost.ocf.berkeley.edu
+      Encryption Always
+    '';
+  };
 
   # Instead of populating /etc/ocf using `environment.etc`, we use a systemd
   # service to pull the repository every 15 minutes. This allows us to keep
