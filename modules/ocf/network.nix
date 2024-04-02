@@ -18,6 +18,8 @@ in
   };
 
   config = mkIf (cfg.enable) {
+    networking.useDHCP = false;
+
     systemd.network = {
       enable = true;
 
