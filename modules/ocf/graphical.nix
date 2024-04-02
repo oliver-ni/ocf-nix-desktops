@@ -2,10 +2,10 @@
 
 with lib;
 let
-  cfg = config.ocf.de;
+  cfg = config.ocf.graphical;
 in
 {
-  options.ocf.de = {
+  options.ocf.graphical = {
     enable = mkEnableOption "Enable desktop environment configuration";
   };
 
@@ -16,9 +16,9 @@ in
     };
 
     environment.etc = {
-      skel.source = ./de/skel;
-      "ocf-assets".source = ./de/assets;
-      "p10k.zsh".source = ./de/p10k.zsh;
+      skel.source = ./graphical/skel;
+      "ocf-assets".source = ./graphical/assets;
+      "p10k.zsh".source = ./graphical/p10k.zsh;
     };
 
     programs.steam.enable = true;
