@@ -8,9 +8,9 @@
   networking.hostName = "snowball";
 
   fileSystems."/home" = {
-    device = "none";
+    device = "tmpfs";
     fsType = "tmpfs";
-    options = [ "size=8G" "mode=755" ];
+    options = [ "size=16G" "mode=755" ];
   };
 
   ocf = {
