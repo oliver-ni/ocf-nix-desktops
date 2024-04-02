@@ -24,6 +24,7 @@
 
       pkgs-x86_64-linux = import nixpkgs {
         system = "x86_64-linux";
+        config = { allowUnfree = true; };
         overlays = [
           ocflib.overlays.default
           ocf-sync-etc.overlays.default
