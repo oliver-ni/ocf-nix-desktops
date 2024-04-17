@@ -168,10 +168,17 @@ in
       };
     };
 
+    # KDE 6.0.3 has a bug that breaks logging out within the first 60 seconds.
+    # This is caused by the DrKonqi service's ExecStartPre command, which sleeps
+    # for 60 seconds to let the system settle before monitoring coredumps. We
+    # don't need this wait, so we remove the ExecStartPre entry.
+    systemd.user.services.drkonqi-coredump-pickup.unitConfig.ExecStartPre = lib.mkForce [ ];
+
     systemd.user.services.wayout = {
       description = "Automatic idle logout manager";
-      wantedBy = [ "graphical-session.target" ];
       after = [ "graphical-session.target" ];
+      partOf = [ "graphical-session.target" ];
+      wantedBy = [ "graphical-session.target" ];
       serviceConfig = {
         ExecStart = "${pkgs.ocf.wayout}/bin/wayout";
         Type = "simple";
