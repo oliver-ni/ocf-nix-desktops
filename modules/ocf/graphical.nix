@@ -15,6 +15,18 @@ in
       makeHomeDir.skelDirectory = "/etc/skel";
     };
 
+    boot = {
+      loader.timeout = 0;
+
+      initrd = {
+        verbose = false;
+        systemd.enable = true;
+      };
+
+      consoleLogLevel = 0;
+      kernelParams = [ "quiet" "udev.log_level=3" ];
+    };
+
     environment.etc = {
       skel.source = ./graphical/skel;
       "ocf-assets".source = ./graphical/assets;
