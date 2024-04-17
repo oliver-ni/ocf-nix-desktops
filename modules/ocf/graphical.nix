@@ -30,18 +30,9 @@ in
     environment.etc = {
       skel.source = ./graphical/skel;
       "ocf-assets".source = ./graphical/assets;
-      "p10k.zsh".source = ./graphical/p10k.zsh;
     };
 
     programs.steam.enable = true;
-
-    programs.zsh.shellInit = ''
-      if [[ ! -f ~/.zshrc ]]; then
-        source ${pkgs.zsh-powerlevel10k}/share/zsh-powerlevel10k/powerlevel10k.zsh-theme
-        source /etc/p10k.zsh
-      fi
-      zsh-newuser-install() { :; }
-    '';
 
     environment.systemPackages = with pkgs; [
       pkgs.ocf.plasma-applet-commandoutput
@@ -57,7 +48,6 @@ in
       firefox
       libreoffice
       vscode-fhs
-      zsh-powerlevel10k
       kitty
     ];
 

@@ -39,6 +39,7 @@
     zsh
     fish
     xonsh
+    zsh-powerlevel10k
 
     # System utilities
     dnsutils
@@ -106,7 +107,18 @@
   hardware.pulseaudio.enable = false;
 
   programs = {
-    zsh.enable = true;
+    zsh = {
+      enable = true;
+
+      shellInit = ''
+        if [[ ! -f ~/.zshrc ]]; then
+          source ${pkgs.zsh-powerlevel10k}/share/zsh-powerlevel10k/powerlevel10k.zsh-theme
+          source /etc/p10k.zsh
+        fi
+        zsh-newuser-install() { :; }
+      '';
+    };
+
     fish.enable = true;
     xonsh.enable = true;
     nix-ld.enable = true;
@@ -115,6 +127,8 @@
   networking.firewall.enable = false;
 
   environment.etc = {
+    "p10k.zsh".source = ./base/p10k.zsh;
+
     papersize.text = "letter";
     "cups/lpoptions".text = "Default double";
     "cups/client.conf".text = ''
