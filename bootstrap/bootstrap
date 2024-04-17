@@ -2,6 +2,7 @@
 
 import argparse
 import json
+import shutil
 import sys
 from pathlib import Path
 from subprocess import check_call, check_output
@@ -16,6 +17,9 @@ def setup_disk(args):
     if input().lower() != "y":
         print("Exiting.")
         sys.exit(1)
+
+    print("Unmounting existing filesystems...")
+    check_call(["umount", "-R", "/mnt"])
 
     print("Writing partitions...")
     check_call(["parted", "-a", "optimal", args.device, "mklabel", "gpt"])
@@ -52,6 +56,7 @@ def write_configs(args):
     # Clone the config repo
     print(f"Downloading configuration files from {args.config_repo_url}...")
     config_path = Path() / "bootstrap-config"
+    shutil.rmtree(config_path, ignore_errors=True)
     check_call(["git", "clone", args.config_repo_url, config_path])
 
     # Generate the hardware configuration
@@ -71,9 +76,9 @@ def write_configs(args):
 
     # Write the configurations
     print("Writing configurations...")
-    with open(config_path / "hardware" / f"{args.hostname}.nix") as f:
+    with open(config_path / "hardware" / f"{args.hostname}.nix", "w") as f:
         f.write(hardware_config)
-    with open(config_path / "hosts" / f"{args.hostname}.nix") as f:
+    with open(config_path / "hosts" / f"{args.hostname}.nix", "w") as f:
         f.write(system_config)
 
 
