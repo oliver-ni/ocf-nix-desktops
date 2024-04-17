@@ -74,6 +74,7 @@
       nixosConfigurations = builtins.mapAttrs
         (host: config: nixpkgs.lib.nixosSystem {
           system = "x86_64-linux";
+          pkgs = pkgs-x86_64-linux;
           modules = config.imports;
         })
         colmena;
