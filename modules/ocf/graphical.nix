@@ -160,7 +160,7 @@ in
 
         sddm = {
           enable = true;
-          theme = "catppuccin-latte";
+          # theme = "catppuccin-latte";
           wayland.enable = true;
           settings.Users = {
             RememberLastUser = false;
