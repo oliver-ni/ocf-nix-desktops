@@ -71,7 +71,16 @@
         })
         hosts;
 
+      nixosConfigurations = builtins.mapAttrs
+        (host: config: nixpkgs.lib.nixosSystem {
+          system = "x86_64-linux";
+          modules = config.imports;
+        })
+        colmena;
+
       colmenaOutputs = {
+        inherit nixosConfigurations;
+
         colmena = colmena // {
           meta = { nixpkgs = pkgs-x86_64-linux; };
         };
