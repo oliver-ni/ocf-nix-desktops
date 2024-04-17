@@ -7,6 +7,8 @@ import sys
 from pathlib import Path
 from subprocess import check_call, check_output
 
+CONFIG_PATH = Path() / "bootstrap-config"
+
 
 def setup_disk(args):
     print(f"I will now set up the disk {args.device}, writing the following partitions:")
@@ -48,24 +50,23 @@ def get_iface(args):
 
 def get_nixos_version(args):
     # Get the NixOS installer version to put into system.stateVersion
-    output = check_output(["nixos-version"])
+    output = check_output(["nixos-version"]).decode("utf-8")
     return output[:4]
 
 
 def write_configs(args):
     # Clone the config repo
     print(f"Downloading configuration files from {args.config_repo_url}...")
-    config_path = Path() / "bootstrap-config"
-    shutil.rmtree(config_path, ignore_errors=True)
-    check_call(["git", "clone", args.config_repo_url, config_path])
+    shutil.rmtree(CONFIG_PATH, ignore_errors=True)
+    check_call(["git", "clone", args.config_repo_url, CONFIG_PATH])
 
     # Generate the hardware configuration
     print(f"Retrieving hardware configuration from nixos-generate-config...")
-    hardware_config = check_output(["nixos-generate-config", "--show-hardware-config"])
+    hardware_config = check_output(["nixos-generate-config", "--root", "/mnt", "--show-hardware-config"]).decode("utf-8")
 
     # Generate the system configuration
     print("Templating bootstrap system configuration...")
-    with open(config_path / "bootstrap" / "template.nix") as f:
+    with open(CONFIG_PATH / "bootstrap" / "template.nix") as f:
         system_config = (
             f.read()
             .replace("{{{ hostname }}}", args.hostname)
@@ -76,10 +77,12 @@ def write_configs(args):
 
     # Write the configurations
     print("Writing configurations...")
-    with open(config_path / "hardware" / f"{args.hostname}.nix", "w") as f:
+    with open(CONFIG_PATH / "hardware" / f"{args.hostname}.nix", "w") as f:
         f.write(hardware_config)
-    with open(config_path / "hosts" / f"{args.hostname}.nix", "w") as f:
+    with open(CONFIG_PATH / "hosts" / f"{args.hostname}.nix", "w") as f:
         f.write(system_config)
+
+    check_call(["git", "add", "."], cwd=CONFIG_PATH)
 
 
 def install_nixos(args):
@@ -87,7 +90,7 @@ def install_nixos(args):
     if input().lower() != "y":
         print("Exiting.")
         sys.exit(1)
-    check_call(["nixos-install", "--root", "/mnt"])
+    check_call(["nixos-install", "--root", "/mnt", "--flake", f"{CONFIG_PATH.absolute()}#{args.hostname}"])
 
 
 def main():
