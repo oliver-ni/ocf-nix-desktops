@@ -50,10 +50,13 @@
       ];
 
       # Put modules for specific hosts here.
-      hosts = {
-        snowball = [ ./hosts/snowball.nix ];
-        tornado = [ ./hosts/tornado.nix ];
-      };
+      hosts = nixpkgs.lib.concatMapAttrs
+        (filename: _: rec {
+          ${nixpkgs.lib.nameFromURL filename "."} = [
+            ./hosts/${filename}
+          ];
+        })
+        (builtins.readDir ./hosts);
 
       # =====================
       # Colmena Configuration
