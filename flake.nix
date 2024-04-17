@@ -79,7 +79,7 @@
         })
         colmena;
 
-      colmenaOutputs = {
+      directOutputs = {
         inherit nixosConfigurations;
 
         colmena = colmena // {
@@ -91,14 +91,17 @@
       # Dev Shell Configuration
       # =======================
 
-      devShellOutputs = flake-utils.lib.eachDefaultSystem
+      systemOutputs = flake-utils.lib.eachDefaultSystem
         (system:
-          let pkgs = import nixpkgs { inherit system; }; in {
+          let pkgs = import nixpkgs { inherit system; }; in
+          {
             devShells.default = pkgs.mkShell {
               packages = [ pkgs.colmena ];
             };
+
+            packages.bootstrap = pkgs.callPackage ./bootstrap { };
           }
         );
     in
-    colmenaOutputs // devShellOutputs;
+    directOutputs // systemOutputs;
 }
