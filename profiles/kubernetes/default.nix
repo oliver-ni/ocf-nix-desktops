@@ -1,6 +1,15 @@
 { config, pkgs, lib, ... }:
 
 let
+  kubernetes = pkgs.kubernetes.overrideAttrs (oldAttrs: rec {
+    version = "1.30.0";
+    src = pkgs.fetchFromGitHub {
+      owner = "kubernetes";
+      repo = "kubernetes";
+      rev = "v${version}";
+      hash = "sha256-7xRRpchjwtV3dGbZ2hN9qj6soAuiF/K7vTY0LzE6Z5w=";
+    };
+  });
   kubePkgs = with pkgs; [ kubernetes util-linux iproute2 ethtool cri-o iptables-legacy socat conntrack-tools gvisor cri-tools ebtables ];
 in
 {
@@ -117,7 +126,7 @@ in
         RestartSec = 10;
 
         ExecStart = ''
-          ${pkgs.kubernetes}/bin/kubelet \
+          ${kubernetes}/bin/kubelet \
             --kubeconfig=/etc/kubernetes/kubelet.conf \
             --bootstrap-kubeconfig=/etc/kubernetes/bootstrap-kubelet.conf \
             --config=/var/lib/kubelet/config.yaml \
