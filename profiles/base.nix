@@ -34,6 +34,18 @@
     "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAILOssvEhZ5BG96yH4fsjYhY6xKt3AKyuyAD5TXapdQUw" # lemurseven
   ];
 
+  programs.ssh = {
+    package = pkgs.openssh_gssapi;
+    extraConfig = ''
+      CanonicalizeHostname yes
+      CanonicalDomains ocf.berkeley.edu
+      Host *.ocf.berkeley.edu *.ocf.io 169.229.226.* 2607:f140:8801::*
+          GSSAPIAuthentication yes
+          GSSAPIKeyExchange yes
+          GSSAPIDelegateCredentials no
+    '';
+  };
+
   environment.enableAllTerminfo = true;
   environment.systemPackages = with pkgs; [
     # Shells
