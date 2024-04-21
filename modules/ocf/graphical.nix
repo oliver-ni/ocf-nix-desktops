@@ -3,6 +3,16 @@
 with lib;
 let
   cfg = config.ocf.graphical;
+
+  # Default openssh doesn't include GSSAPI support, so we need to override sshfs
+  # to use the openssh_gssapi package instead. This is annoying because the
+  # sshfs package's openssh argument is nested in another layer of callPackage,
+  # so we override callPackage instead to override openssh.
+  sshfs = pkgs.sshfs.override {
+    callPackage = fn: args: (pkgs.callPackage fn args).override {
+      openssh = pkgs.openssh_gssapi;
+    };
+  };
 in
 {
   options.ocf.graphical = {
@@ -11,6 +21,12 @@ in
 
   config = mkIf cfg.enable {
     security.pam = {
+      # Mount ~/remote
+      services.sddm.pamMount = true;
+      services.sddm.rules.session.mount.order = config.security.pam.services.sddm.rules.session.krb5.order + 50;
+      mount.extraVolumes = [ ''<volume fstype="fuse" path="${sshfs}/bin/sshfs#%(USER)@tsunami:" mountpoint="~/remote/" options="follow_symlinks,UserKnownHostsFile=/dev/null,StrictHostKeyChecking=no" pgrp="ocf" />'' ];
+
+      # Create home directories
       services.systemd-user.makeHomeDir = true;
       makeHomeDir.skelDirectory = "/etc/skel";
     };
