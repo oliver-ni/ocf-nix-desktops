@@ -37,7 +37,10 @@ in
     };
 
     security.pam.services.sudo.text =
-      let pam_krb5_so = "${pkgs.pam_krb5}/lib/security/pam_krb5.so"; in ''
+      let
+        pam_krb5_so = "${pkgs.pam_krb5}/lib/security/pam_krb5.so";
+      in
+      ''
         # use /root principal to sudo
         auth required ${pam_krb5_so} minimum_uid=1000 alt_auth_map=%s/root only_alt_auth no_ccache
         account required pam_unix.so
@@ -58,11 +61,9 @@ in
       package = pkgs.heimdal;
 
       settings = {
-        realms = {
-          "OCF.BERKELEY.EDU" = {
-            admin_server = "kerberos.ocf.berkeley.edu";
-            kdc = [ "kerberos.ocf.berkeley.edu" ];
-          };
+        realms."OCF.BERKELEY.EDU" = {
+          admin_server = "kerberos.ocf.berkeley.edu";
+          kdc = [ "kerberos.ocf.berkeley.edu" ];
         };
         domain_realm = {
           "ocf.berkeley.edu" = "OCF.BERKELEY.EDU";
