@@ -23,8 +23,14 @@ in
     systemd.network = {
       enable = true;
 
-      networks."10-wired" = {
+      links."10-${cfg.interface}" = {
+        matchConfig.OriginalName = cfg.interface;
+        linkConfig.WakeOnLan = "magic";
+      };
+
+      networks."10-${cfg.interface}" = {
         matchConfig.Name = cfg.interface;
+        linkConfig.RequiredForOnline = "routable";
         address = [
           "169.229.226.${toString cfg.lastOctet}/24"
           "2607:f140:8801::1:${toString cfg.lastOctet}/64"
@@ -39,7 +45,6 @@ in
           "1.1.1.1"
         ];
         domains = [ "ocf.berkeley.edu" "ocf.io" ];
-        linkConfig.RequiredForOnline = "routable";
       };
     };
   };
