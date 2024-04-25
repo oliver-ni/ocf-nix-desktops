@@ -22,8 +22,8 @@ in
   config = mkIf cfg.enable {
     security.pam = {
       # Mount ~/remote
-      services.sddm.pamMount = true;
-      services.sddm.rules.session.mount.order = config.security.pam.services.sddm.rules.session.krb5.order + 50;
+      services.login.pamMount = true;
+      services.login.rules.session.mount.order = config.security.pam.services.login.rules.session.krb5.order + 50;
       mount.extraVolumes = [ ''<volume fstype="fuse" path="${sshfs}/bin/sshfs#%(USER)@tsunami:" mountpoint="~/remote/" options="follow_symlinks,UserKnownHostsFile=/dev/null,StrictHostKeyChecking=no" pgrp="ocf" />'' ];
 
       # Create home directories
