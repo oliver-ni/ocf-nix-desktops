@@ -27,7 +27,8 @@ in
       mount.extraVolumes = [ ''<volume fstype="fuse" path="${sshfs}/bin/sshfs#%(USER)@tsunami:" mountpoint="~/remote/" options="follow_symlinks,UserKnownHostsFile=/dev/null,StrictHostKeyChecking=no" pgrp="ocf" />'' ];
 
       # Create home directories
-      services.systemd-user.makeHomeDir = true;
+      services.login.makeHomeDir = true;
+      services.sshd.makeHomeDir = true;
       makeHomeDir.skelDirectory = "/etc/skel";
     };
 
