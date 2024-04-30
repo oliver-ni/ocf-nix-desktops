@@ -5,7 +5,7 @@ import json
 import shutil
 import sys
 from pathlib import Path
-from subprocess import check_call, check_output
+from subprocess import call, check_call, check_output
 
 CONFIG_PATH = Path() / "bootstrap-config"
 
@@ -21,7 +21,7 @@ def setup_disk(args):
         sys.exit(1)
 
     print("Unmounting existing filesystems...")
-    check_call(["umount", "-R", "/mnt"])
+    call(["umount", "-R", "/mnt"])
 
     print("Writing partitions...")
     check_call(["parted", "-a", "optimal", args.device, "mklabel", "gpt"])
@@ -62,7 +62,9 @@ def write_configs(args):
 
     # Generate the hardware configuration
     print(f"Retrieving hardware configuration from nixos-generate-config...")
-    hardware_config = check_output(["nixos-generate-config", "--root", "/mnt", "--show-hardware-config"]).decode("utf-8")
+    hardware_config = check_output(["nixos-generate-config", "--root", "/mnt", "--show-hardware-config"]).decode(
+        "utf-8"
+    )
 
     # Generate the system configuration
     print("Templating bootstrap system configuration...")
