@@ -2,7 +2,7 @@
 
 {
   imports = [
-    ../hardware/ridge-test-pc.nix
+    ../hardware/snowball.nix
   ];
 
   networking.hostName = "snowball";
@@ -13,13 +13,16 @@
     options = [ "size=16G" "mode=755" ];
   };
 
+  services.xserver.videoDrivers = [ "nvidia" ];
+  hardware.nvidia.modesetting.enable = true;
+
   ocf = {
     auth.enable = true;
     graphical.enable = true;
 
     network = {
       enable = true;
-      interface = "enp8s0";
+      interface = "enp9s0";
       lastOctet = 99;
     };
   };
