@@ -203,6 +203,15 @@ in
       };
     };
 
+    systemd.user.services.desktoprc = {
+      description = "Source custom rc shared across desktops";
+      script = ''
+        [ -f ~/remote/.desktoprc ] && . ~/remote/.desktoprc
+      '';
+      partOf = [ "graphical-session.target" ];
+      wantedBy = [ "graphical-session.target" ];
+    };
+
     # Conflict override since multiple DEs set this option
     programs.ssh.askPassword = pkgs.lib.mkForce "${pkgs.ksshaskpass.out}/bin/ksshaskpass";
   };
