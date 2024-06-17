@@ -153,6 +153,10 @@ in
       libreoffice
       vscode-fhs
       kitty
+
+      # temporary ATDP programs
+      filezilla
+      sublime
     ];
 
     fonts.packages = [ pkgs.meslo-lgs-nf ];
