@@ -23,7 +23,7 @@
     network = {
       enable = true;
       interface = "enp9s0";
-      lastOctet = 100;
+      lastOctet = 141;
     };
   };
 
