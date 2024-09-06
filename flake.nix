@@ -46,6 +46,7 @@
         ./modules/ocf/auth.nix
         ./modules/ocf/graphical.nix
         ./modules/ocf/network.nix
+        ./modules/ocf/tmpfs-home.nix
         ./profiles/base.nix
       ];
 
