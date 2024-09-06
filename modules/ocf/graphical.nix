@@ -153,6 +153,10 @@ in
       libreoffice
       vscode-fhs
       kitty
+
+      # temporary ATDP programs
+      filezilla
+      sublime
     ];
 
     fonts.packages = [ pkgs.meslo-lgs-nf ];
@@ -201,6 +205,15 @@ in
         Type = "simple";
         Restart = "on-failure";
       };
+    };
+
+    systemd.user.services.desktoprc = {
+      description = "Source custom rc shared across desktops";
+      script = ''
+        [ -f ~/remote/.desktoprc ] && . ~/remote/.desktoprc
+      '';
+      partOf = [ "graphical-session.target" ];
+      wantedBy = [ "graphical-session.target" ];
     };
 
     # Conflict override since multiple DEs set this option
