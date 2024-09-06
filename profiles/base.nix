@@ -62,7 +62,7 @@
     pulseaudio
 
     # Languages
-    (python3.withPackages (ps: [ ps.ocflib ]))
+    (python312.withPackages (ps: [ ps.ocflib ]))
     poetry
     ruby
     elixir
