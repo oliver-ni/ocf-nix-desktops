@@ -7,15 +7,10 @@
 
   networking.hostName = "fred";
 
-  fileSystems."/home" = {
-    device = "tmpfs";
-    fsType = "tmpfs";
-    options = [ "size=16G" "mode=755" ];
-  };
-
   ocf = {
     auth.enable = true;
     graphical.enable = true;
+    tmpfsHome.enable = true;
 
     network = {
       enable = true;
