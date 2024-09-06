@@ -1,15 +1,14 @@
 { lib, config, pkgs, ... }:
 
-with lib;
 let
   cfg = config.ocf.auth;
 in
 {
   options.ocf.auth = {
-    enable = mkEnableOption "Enable OCF authentication";
+    enable = lib.mkEnableOption "Enable OCF authentication";
   };
 
-  config = mkIf (cfg.enable) {
+  config = lib.mkIf cfg.enable {
     users.ldap = {
       enable = true;
       server = "ldaps://ldap.ocf.berkeley.edu";
@@ -76,4 +75,3 @@ in
     };
   };
 }
-

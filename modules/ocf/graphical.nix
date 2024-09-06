@@ -1,6 +1,5 @@
 { lib, config, pkgs, ... }:
 
-with lib;
 let
   cfg = config.ocf.graphical;
 
@@ -16,10 +15,10 @@ let
 in
 {
   options.ocf.graphical = {
-    enable = mkEnableOption "Enable desktop environment configuration";
+    enable = lib.mkEnableOption "Enable desktop environment configuration";
   };
 
-  config = mkIf cfg.enable {
+  config = lib.mkIf cfg.enable {
     security.pam = {
       # Mount ~/remote
       services.login.pamMount = true;
@@ -39,7 +38,7 @@ in
 
     environment.etc = {
       skel.source = ./graphical/skel;
-      "ocf-assets".source = ./graphical/assets;
+      ocf-assets.source = ./graphical/assets;
     };
 
     programs.steam.enable = true;

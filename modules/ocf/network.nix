@@ -1,19 +1,18 @@
 { lib, config, ... }:
 
-with lib;
 let
   cfg = config.ocf.network;
 in
 {
   options.ocf.network = {
-    enable = mkEnableOption "Enable OCF network configuration";
-    lastOctet = mkOption {
-      type = types.int;
+    enable = lib.mkEnableOption "Enable OCF network configuration";
+    lastOctet = lib.mkOption {
+      type = lib.types.int;
       description = "Last octet of the IP address";
     };
   };
 
-  config = mkIf (cfg.enable) {
+  config = lib.mkIf cfg.enable {
     networking.useDHCP = false;
 
     systemd.network = {

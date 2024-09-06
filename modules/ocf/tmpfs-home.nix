@@ -1,15 +1,14 @@
 { lib, config, ... }:
 
-with lib;
 let
   cfg = config.ocf.tmpfsHome;
 in
 {
   options.ocf.tmpfsHome = {
-    enable = mkEnableOption "Enable /home on tmpfs";
+    enable = lib.mkEnableOption "Enable /home on tmpfs";
   };
 
-  config = mkIf cfg.enable {
+  config = lib.mkIf cfg.enable {
     fileSystems."/home" = {
       device = "tmpfs";
       fsType = "tmpfs";
