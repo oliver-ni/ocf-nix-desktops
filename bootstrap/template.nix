@@ -19,7 +19,6 @@
 
     network = {
       enable = true;
-      interface = "{{{ iface }}}";
       lastOctet = {{{ ip_last_octet }}};
     };
   };

@@ -101,6 +101,7 @@
             };
 
             packages.bootstrap = pkgs.callPackage ./bootstrap { };
+            formatter = pkgs.nixpkgs-fmt;
           }
         );
     in

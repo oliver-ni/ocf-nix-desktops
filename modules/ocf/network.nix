@@ -7,10 +7,6 @@ in
 {
   options.ocf.network = {
     enable = mkEnableOption "Enable OCF network configuration";
-    interface = mkOption {
-      type = types.str;
-      description = "Name of the network interface";
-    };
     lastOctet = mkOption {
       type = types.int;
       description = "Last octet of the IP address";
@@ -23,13 +19,13 @@ in
     systemd.network = {
       enable = true;
 
-      links."10-${cfg.interface}" = {
-        matchConfig.OriginalName = cfg.interface;
+      links."10-wired" = {
+        matchConfig.OriginalName = "en*";
         linkConfig.WakeOnLan = "magic";
       };
 
-      networks."10-${cfg.interface}" = {
-        matchConfig.Name = cfg.interface;
+      networks."10-wired" = {
+        matchConfig.Name = "en*";
         linkConfig.RequiredForOnline = "routable";
         address = [
           "169.229.226.${toString cfg.lastOctet}/24"
