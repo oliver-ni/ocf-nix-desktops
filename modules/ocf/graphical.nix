@@ -209,11 +209,12 @@ in
 
     systemd.user.services.desktoprc = {
       description = "Source custom rc shared across desktops";
+      after = [ "graphical-session.target" ];
+      partOf = [ "graphical-session.target" ];
+      wantedBy = [ "graphical-session.target" ];
       script = ''
         [ -f ~/remote/.desktoprc ] && . ~/remote/.desktoprc
       '';
-      partOf = [ "graphical-session.target" ];
-      wantedBy = [ "graphical-session.target" ];
     };
 
     # Conflict override since multiple DEs set this option
