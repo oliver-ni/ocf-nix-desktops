@@ -2,7 +2,7 @@
 
 {
   imports = [
-    ../hardware/shadow.nix
+    ../hardware/ridge-pc.nix
   ];
 
   networking.hostName = "shadow";

@@ -2,7 +2,7 @@
 
 {
   imports = [
-    ../hardware/spots.nix
+    ../hardware/ridge-pc.nix
   ];
 
   networking.hostName = "spots";

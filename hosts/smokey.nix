@@ -2,7 +2,7 @@
 
 {
   imports = [
-    ../hardware/smokey.nix
+    ../hardware/ridge-pc.nix
   ];
 
   networking.hostName = "smokey";
