@@ -60,6 +60,7 @@
     dnsutils
     cpufrequtils
     pulseaudio
+    pciutils
 
     # Languages
     (python312.withPackages (ps: [ ps.ocflib ]))
@@ -89,6 +90,9 @@
     unzip
     git
     cups
+    tree
+    neofetch
+    pfetch-rs
   ];
 
   services = {
