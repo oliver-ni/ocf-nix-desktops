@@ -66,6 +66,12 @@
     pulseaudio
     pciutils
     usbutils
+    cups
+
+    # Monitoring utilities
+    s-tui
+    htop
+    lsof
 
     # Languages
     (python312.withPackages (ps: [ ps.ocflib ]))
@@ -84,22 +90,30 @@
     helix
     kakoune
 
-    # Other tools
-    ocf.utils
+    # Networking tools
     rsync
-    tmux
-    screen
     wget
     curl
+
+    # File management tools
+    bar
     zip
     unzip
-    git
-    cups
+    _7zz
+    eza
+    file
     tree
+
+    # Other tools
+    ocf.utils
+    tmux
+    screen
+    git
+    comma
+
+    # Cosmetics
     neofetch
     pfetch-rs
-    _7zz
-    s-tui
   ];
 
   services = {
