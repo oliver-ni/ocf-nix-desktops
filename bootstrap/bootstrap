@@ -68,7 +68,7 @@ def write_configs(args):
 
     # Generate the system configuration
     print("Templating bootstrap system configuration...")
-    with open(CONFIG_PATH / "bootstrap" / "template.nix") as f:
+    with open(CONFIG_PATH / "bootstrap" / "host.nix.template") as f:
         system_config = (
             f.read()
             .replace("{{{ hostname }}}", args.hostname)
