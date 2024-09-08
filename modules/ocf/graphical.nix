@@ -158,7 +158,7 @@ in
       sublime
     ];
 
-    fonts.packages = [ pkgs.meslo-lgs-nf ];
+    fonts.packages = with pkgs; [ meslo-lgs-nf noto-fonts noto-fonts-cjk noto-fonts-extra ];
 
     services.xserver = {
       enable = true;

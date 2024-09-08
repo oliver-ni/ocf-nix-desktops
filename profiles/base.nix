@@ -33,6 +33,7 @@
     "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIHC9Yh1qdHa9rq28Ki0i53vtHgg9ksKq8vg9M+9GGPA5" # etw
     "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAILOssvEhZ5BG96yH4fsjYhY6xKt3AKyuyAD5TXapdQUw" # lemurseven
     "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAILOaJJvOUG08qr3yeeQRB71M30cdPMuO69nsf0CodALa" # jaysa
+    "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIHPeJeRNwcPaZupbmCEtUIOuLDfhow35byMp548TUDYP" # rjz
   ];
 
   programs.ssh = {
@@ -61,6 +62,7 @@
     cpufrequtils
     pulseaudio
     pciutils
+    usbutils
 
     # Languages
     (python312.withPackages (ps: [ ps.ocflib ]))
@@ -93,6 +95,8 @@
     tree
     neofetch
     pfetch-rs
+    _7zz
+    s-tui
   ];
 
   services = {
