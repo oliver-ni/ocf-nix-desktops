@@ -1,7 +1,10 @@
-{ pkgs, ... }:
+{ pkgs, lib, inputs, ... }:
 
 {
-  nix.settings.extra-experimental-features = [ "nix-command" "flakes" ];
+  nix = {
+    settings.experimental-features = "nix-command flakes";
+    registry = lib.mapAttrs (_: value: { flake = value; }) inputs;
+  };
 
   boot.loader = {
     systemd-boot = {

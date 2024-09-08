@@ -16,7 +16,7 @@
     };
   };
 
-  outputs = { self, nixpkgs, flake-utils, ocflib, ocf-sync-etc, ocf-utils, wayout }:
+  outputs = inputs@{ self, nixpkgs, flake-utils, ocflib, ocf-sync-etc, ocf-utils, wayout }:
     let
       # ================
       # nixpkgs overlays
@@ -85,7 +85,12 @@
         inherit nixosConfigurations;
 
         colmena = colmena // {
-          meta = { nixpkgs = pkgs-x86_64-linux; };
+          meta = {
+            nixpkgs = pkgs-x86_64-linux;
+            specialArgs = {
+              inherit inputs;
+            };
+          };
         };
       };
 
