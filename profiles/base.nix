@@ -2,8 +2,12 @@
 
 {
   nix = {
-    settings.experimental-features = "nix-command flakes";
+    channel.enable = false;
     registry = lib.mapAttrs (_: value: { flake = value; }) inputs;
+    settings = {
+      experimental-features = "nix-command flakes";
+      nix-path = lib.mapAttrsToList (name: _: "${name}=flake:${name}") inputs;
+    };
   };
 
   boot.loader = {
