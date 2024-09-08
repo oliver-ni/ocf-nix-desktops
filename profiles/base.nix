@@ -109,7 +109,7 @@
     tmux
     screen
     git
-    comma
+    comma-with-db
 
     # Cosmetics
     neofetch

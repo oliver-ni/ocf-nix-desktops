@@ -4,6 +4,11 @@
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
     flake-utils.url = "github:numtide/flake-utils";
+    nix-index-database = {
+      url = "github:nix-community/nix-index-database";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     ocflib.url = "github:ocf/ocflib";
     ocf-sync-etc.url = "github:ocf/etc";
     ocf-utils = {
@@ -16,7 +21,7 @@
     };
   };
 
-  outputs = inputs@{ self, nixpkgs, flake-utils, ocflib, ocf-sync-etc, ocf-utils, wayout }:
+  outputs = inputs@{ self, nixpkgs, flake-utils, nix-index-database, ocflib, ocf-sync-etc, ocf-utils, wayout }:
     let
       # ================
       # nixpkgs overlays
@@ -28,6 +33,7 @@
         overlays = [
           ocflib.overlays.default
           ocf-sync-etc.overlays.default
+          nix-index-database.overlays.nix-index
           (final: prev: {
             ocf.utils = ocf-utils.packages.x86_64-linux.default;
             ocf.wayout = wayout.packages.x86_64-linux.default;
