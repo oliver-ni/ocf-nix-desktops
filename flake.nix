@@ -11,6 +11,7 @@
 
     ocflib.url = "github:ocf/ocflib";
     ocf-sync-etc.url = "github:ocf/etc";
+    ocf-pam-trimspaces.url = "github:ocf/pam_trimspaces";
     ocf-utils = {
       url = "github:ocf/utils";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -21,7 +22,17 @@
     };
   };
 
-  outputs = inputs@{ self, nixpkgs, flake-utils, nix-index-database, ocflib, ocf-sync-etc, ocf-utils, wayout }:
+  outputs =
+    { self
+    , nixpkgs
+    , flake-utils
+    , nix-index-database
+    , ocflib
+    , ocf-sync-etc
+    , ocf-pam-trimspaces
+    , ocf-utils
+    , wayout
+    }@inputs:
     let
       # ================
       # nixpkgs overlays
@@ -33,6 +44,7 @@
         overlays = [
           ocflib.overlays.default
           ocf-sync-etc.overlays.default
+          ocf-pam-trimspaces.overlays.default
           nix-index-database.overlays.nix-index
           (final: prev: {
             ocf.utils = ocf-utils.packages.x86_64-linux.default;

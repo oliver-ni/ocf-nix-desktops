@@ -25,6 +25,13 @@ in
       services.login.rules.session.mount.order = config.security.pam.services.login.rules.session.krb5.order + 50;
       mount.extraVolumes = [ ''<volume fstype="fuse" path="${sshfs}/bin/sshfs#%(USER)@tsunami:" mountpoint="~/remote/" options="follow_symlinks,UserKnownHostsFile=/dev/null,StrictHostKeyChecking=no" pgrp="ocf" />'' ];
 
+      # Trim spaces from username
+      services.login.rules.auth.trimspaces = {
+        control = "requisite";
+        modulePath = "${pkgs.ocf-pam_trimspaces}/lib/security/pam_trimspaces.so";
+        order = 0;
+      };
+
       # Create home directories
       services.login.makeHomeDir = true;
       services.sshd.makeHomeDir = true;

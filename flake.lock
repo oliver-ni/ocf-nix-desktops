@@ -134,6 +134,21 @@
         "type": "github"
       }
     },
+    "ocf-pam-trimspaces": {
+      "locked": {
+        "lastModified": 1725774443,
+        "narHash": "sha256-2eVcqpZMqGZkhDF5iG8AcYDEGAXMIJ/d9v2gJW1BgCM=",
+        "owner": "ocf",
+        "repo": "pam_trimspaces",
+        "rev": "212ac927015d21c06f6fae41b293936a5dad3f79",
+        "type": "github"
+      },
+      "original": {
+        "owner": "ocf",
+        "repo": "pam_trimspaces",
+        "type": "github"
+      }
+    },
     "ocf-sync-etc": {
       "locked": {
         "lastModified": 1725494700,
@@ -206,6 +221,7 @@
         "flake-utils": "flake-utils",
         "nix-index-database": "nix-index-database",
         "nixpkgs": "nixpkgs",
+        "ocf-pam-trimspaces": "ocf-pam-trimspaces",
         "ocf-sync-etc": "ocf-sync-etc",
         "ocf-utils": "ocf-utils",
         "ocflib": "ocflib_2",
