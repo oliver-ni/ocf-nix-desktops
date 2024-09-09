@@ -96,6 +96,7 @@
           system = "x86_64-linux";
           pkgs = pkgs-x86_64-linux;
           modules = config.imports;
+          specialArgs = { inherit inputs; };
         })
         colmena;
 
