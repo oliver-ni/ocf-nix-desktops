@@ -3,13 +3,13 @@
 
   inputs = {
     # Global NixOS system version
-    nixpkgs.url = "github:NixOS/nixpkgs/23.11";
+    nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
 
     # Separate nixpkgs pin for Kubernetes (we don't want to accidentally update that)
     kubePin.url = "github:nixos/nixpkgs/fd281bd6b7d3e32ddfa399853946f782553163b5";
 
     # Some helper methods...
-    flakeUtils.url = "github:gytis-ivaskevicius/flake-utils-plus/v1.4.0";
+    flakeUtils.url = "github:gytis-ivaskevicius/flake-utils-plus";
   };
 
   outputs = { self, flakeUtils, ... }@inputs:
@@ -39,4 +39,3 @@
       };
     };
 }
-
