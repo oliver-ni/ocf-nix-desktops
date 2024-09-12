@@ -129,10 +129,10 @@
     envfs = {
       enable = true;
       extraFallbackPathCommands = ''
-        ln -s ${pkgs.bash}/bin/bash $out/bash
-        ln -s ${pkgs.zsh}/bin/zsh $out/zsh
-        ln -s ${pkgs.fish}/bin/fish $out/fish
-        ln -s ${pkgs.xonsh}/bin/xonsh $out/xonsh
+        ln -s ${lib.getExe pkgs.bash} $out/bash
+        ln -s ${lib.getExe pkgs.zsh} $out/zsh
+        ln -s ${lib.getExe pkgs.fish} $out/fish
+        ln -s ${lib.getExe pkgs.xonsh} $out/xonsh
       '';
     };
 

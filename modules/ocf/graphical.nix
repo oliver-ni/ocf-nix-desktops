@@ -23,7 +23,7 @@ in
       # Mount ~/remote
       services.login.pamMount = true;
       services.login.rules.session.mount.order = config.security.pam.services.login.rules.session.krb5.order + 50;
-      mount.extraVolumes = [ ''<volume fstype="fuse" path="${sshfs}/bin/sshfs#%(USER)@tsunami:" mountpoint="~/remote/" options="follow_symlinks,UserKnownHostsFile=/dev/null,StrictHostKeyChecking=no" pgrp="ocf" />'' ];
+      mount.extraVolumes = [ ''<volume fstype="fuse" path="${lib.getExe sshfs}#%(USER)@tsunami:" mountpoint="~/remote/" options="follow_symlinks,UserKnownHostsFile=/dev/null,StrictHostKeyChecking=no" pgrp="ocf" />'' ];
 
       # Trim spaces from username
       services.login.rules.auth.trimspaces = {
@@ -224,6 +224,6 @@ in
     };
 
     # Conflict override since multiple DEs set this option
-    programs.ssh.askPassword = pkgs.lib.mkForce "${pkgs.ksshaskpass.out}/bin/ksshaskpass";
+    programs.ssh.askPassword = pkgs.lib.mkForce (lib.getExe pkgs.ksshaskpass.out);
   };
 }

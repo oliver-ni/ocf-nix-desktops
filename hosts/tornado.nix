@@ -38,7 +38,7 @@
 
   services.cage = {
     enable = true;
-    program = "${pkgs.chromium}/bin/chromium --noerrdialogs --disable-infobars --kiosk https://labmap.ocf.berkeley.edu";
+    program = "${lib.getExe pkgs.chromium} --noerrdialogs --disable-infobars --kiosk https://labmap.ocf.berkeley.edu";
     user = "ocftv";
   };
 
