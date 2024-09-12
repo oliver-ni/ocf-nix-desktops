@@ -31,7 +31,7 @@ in
 
       extraRules = [
         { groups = [ "ocfroot" ]; commands = [ "ALL" ]; }
-        { users = [ "ocfbackups" ]; commands = [{ command = "${pkgs.rsync}/bin/rsync"; options = [ "NOPASSWD" ]; }]; }
+        { users = [ "ocfbackups" ]; commands = [{ command = lib.getExe pkgs.rsync; options = [ "NOPASSWD" ]; }]; }
       ];
     };
 
