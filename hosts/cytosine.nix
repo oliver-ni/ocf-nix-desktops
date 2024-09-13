@@ -1,7 +1,7 @@
 { ... }:
 
 {
-  imports = [ ../hardware/nucleus-c.nix ];
+  imports = [ ../hardware/nucleus.nix ];
 
   networking.hostName = "cytosine";
   networking.bonds.bond0 = import ../util/ocfbond.nix [ "enp66s0f0np0" "enp66s0f1np1" ];

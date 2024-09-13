@@ -1,7 +1,7 @@
 { ... }:
 
 {
-  imports = [ ../hardware/nucleus-d.nix ];
+  imports = [ ../hardware/nucleus.nix ];
 
   networking.hostName = "thymine";
   networking.bonds.bond0 = import ../util/ocfbond.nix [ "enp66s0f0np0" "enp66s0f1np1" ];
