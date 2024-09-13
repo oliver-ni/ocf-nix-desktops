@@ -10,6 +10,13 @@
     };
   };
 
+  # TODO: Don't enable these by default
+  ocf = {
+    compat.enable = lib.mkDefault true;
+    etc.enable = lib.mkDefault true;
+    shell.enable = lib.mkDefault true;
+  };
+
   boot.loader = {
     systemd-boot = {
       enable = true;
@@ -55,15 +62,7 @@
     '';
   };
 
-  environment.enableAllTerminfo = true;
   environment.systemPackages = with pkgs; [
-    # Shells
-    bash
-    zsh
-    fish
-    xonsh
-    zsh-powerlevel10k
-
     # System utilities
     dnsutils
     cpufrequtils
@@ -126,16 +125,6 @@
       settings.X11Forwarding = true;
     };
 
-    envfs = {
-      enable = true;
-      extraFallbackPathCommands = ''
-        ln -s ${lib.getExe pkgs.bash} $out/bash
-        ln -s ${lib.getExe pkgs.zsh} $out/zsh
-        ln -s ${lib.getExe pkgs.fish} $out/fish
-        ln -s ${lib.getExe pkgs.xonsh} $out/xonsh
-      '';
-    };
-
     pipewire = {
       enable = true;
       pulse.enable = true;
@@ -150,58 +139,15 @@
   security.rtkit.enable = true;
   hardware.pulseaudio.enable = false;
 
-  programs = {
-    zsh = {
-      enable = true;
-
-      shellInit = ''
-        if [[ ! -f ~/.zshrc ]]; then
-          source ${pkgs.zsh-powerlevel10k}/share/zsh-powerlevel10k/powerlevel10k.zsh-theme
-          source /etc/p10k.zsh
-        fi
-        zsh-newuser-install() { :; }
-      '';
-    };
-
-    fish.enable = true;
-    xonsh.enable = true;
-    nix-ld.enable = true;
-  };
-
   networking.firewall.enable = false;
 
   environment.etc = {
-    "p10k.zsh".source = ./base/p10k.zsh;
-
     papersize.text = "letter";
     "cups/lpoptions".text = "Default double";
     "cups/client.conf".text = ''
       ServerName printhost.ocf.berkeley.edu
       Encryption Always
     '';
-  };
-
-  # Instead of populating /etc/ocf using `environment.etc`, we use a systemd
-  # service to pull the repository every 15 minutes. This allows us to keep
-  # the repository up to date without needing to update the NixOS config.
-  systemd = {
-    services.sync-etc = {
-      description = "Update OCF etc repository";
-      serviceConfig = {
-        Type = "oneshot";
-        ExecStart = "${pkgs.ocf-sync-etc}/bin/sync-etc /etc/ocf";
-      };
-    };
-
-    timers.sync-etc = {
-      description = "Update OCF etc repository";
-      wantedBy = [ "timers.target" ];
-      timerConfig = {
-        OnCalendar = "*:0/15";
-        RandomizedDelaySec = "15m";
-        FixedRandomDelay = true;
-      };
-    };
   };
 
   environment.etc."nixos/configuration.nix".text = ''
