@@ -3,19 +3,14 @@
 {
   imports = [
     ../hardware/ridge-pc.nix
+    ../profiles/desktop.nix
   ];
 
   networking.hostName = "callie";
 
-  ocf = {
-    auth.enable = true;
-    graphical.enable = true;
-    tmpfsHome.enable = true;
-
-    network = {
-      enable = true;
-      lastOctet = 147;
-    };
+  ocf.network = {
+    enable = true;
+    lastOctet = 147;
   };
 
   # This value determines the NixOS release from which the default

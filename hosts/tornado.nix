@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ pkgs, lib, ... }:
 
 {
   imports = [
@@ -48,7 +48,7 @@
       pipewire-pulse.wantedBy = [ "default.target" ];
     };
 
-    services."cage-tty1".after = [
+    services.cage-tty1.after = [
       "network-online.target"
       "systemd-resolved.service"
     ];

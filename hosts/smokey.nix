@@ -3,6 +3,7 @@
 {
   imports = [
     ../hardware/ridge-pc.nix
+    ../profiles/desktop.nix
   ];
 
   networking.hostName = "smokey";
@@ -11,15 +12,9 @@
   hardware.nvidia.modesetting.enable = true;
   hardware.nvidia.open = false;
 
-  ocf = {
-    auth.enable = true;
-    graphical.enable = true;
-    tmpfsHome.enable = true;
-
-    network = {
-      enable = true;
-      lastOctet = 141;
-    };
+  ocf.network = {
+    enable = true;
+    lastOctet = 141;
   };
 
   # This value determines the NixOS release from which the default

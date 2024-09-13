@@ -63,6 +63,8 @@
   };
 
   environment.systemPackages = with pkgs; [
+    # TODO: Move some of these out of base
+
     # System utilities
     dnsutils
     cpufrequtils
@@ -75,16 +77,6 @@
     s-tui
     htop
     lsof
-
-    # Languages
-    (python312.withPackages (ps: [ ps.ocflib ]))
-    poetry
-    ruby
-    elixir
-    clojure
-    ghc
-    rustup
-    clang
 
     # Editors
     vim

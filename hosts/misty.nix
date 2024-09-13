@@ -3,19 +3,14 @@
 {
   imports = [
     ../hardware/ridge-pc.nix
+    ../profiles/desktop.nix
   ];
 
   networking.hostName = "misty";
 
-  ocf = {
-    auth.enable = true;
-    graphical.enable = true;
-    tmpfsHome.enable = true;
-
-    network = {
-      enable = true;
-      lastOctet = 156;
-    };
+  ocf.network = {
+    enable = true;
+    lastOctet = 156;
   };
 
   # This value determines the NixOS release from which the default

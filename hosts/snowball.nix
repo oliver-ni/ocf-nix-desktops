@@ -3,6 +3,7 @@
 {
   imports = [
     ../hardware/snowball.nix
+    ../profiles/desktop.nix
   ];
 
   networking.hostName = "snowball";
@@ -11,15 +12,9 @@
   hardware.nvidia.modesetting.enable = true;
   hardware.nvidia.open = false;
 
-  ocf = {
-    auth.enable = true;
-    graphical.enable = true;
-    tmpfsHome.enable = true;
-
-    network = {
-      enable = true;
-      lastOctet = 140;
-    };
+  ocf.network = {
+    enable = true;
+    lastOctet = 140;
   };
 
   # This value determines the NixOS release from which the default
