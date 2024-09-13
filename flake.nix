@@ -62,7 +62,6 @@
       # Put modules common to all hosts here.
       commonModules = [
         ./modules/ocf/auth.nix
-        ./modules/ocf/compat.nix
         ./modules/ocf/etc.nix
         ./modules/ocf/graphical.nix
         ./modules/ocf/network.nix

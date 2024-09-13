@@ -12,7 +12,6 @@
 
   # TODO: Don't enable these by default
   ocf = {
-    compat.enable = lib.mkDefault true;
     etc.enable = lib.mkDefault true;
     shell.enable = lib.mkDefault true;
   };
@@ -122,6 +121,18 @@
       pulse.enable = true;
       jack.enable = true;
       alsa.enable = true;
+    };
+
+    envfs = {
+      enable = true;
+
+      # We need /bin/bash etc. to work because people's shells are set to it
+      extraFallbackPathCommands = ''
+        ln -s ${lib.getExe pkgs.bash} $out/bash
+        ln -s ${lib.getExe pkgs.zsh} $out/zsh
+        ln -s ${lib.getExe pkgs.fish} $out/fish
+        ln -s ${lib.getExe pkgs.xonsh} $out/xonsh
+      '';
     };
 
     fwupd.enable = true;
