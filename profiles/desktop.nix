@@ -2,7 +2,7 @@
 
 {
   ocf = {
-    auth.enable = true;
+    etc.enable = true;
     graphical.enable = true;
     tmpfsHome.enable = true;
   };
@@ -10,6 +10,12 @@
   boot.loader.systemd-boot.consoleMode = "max";
 
   environment.systemPackages = with pkgs; [
+    # Editors
+    emacs
+    neovim
+    helix
+    kakoune
+
     # Languages
     (python312.withPackages (ps: [ ps.ocflib ]))
     poetry
@@ -19,6 +25,23 @@
     ghc
     rustup
     clang
+
+    # File management tools
+    zip
+    unzip
+    _7zz
+    eza
+    tree
+
+    # Other tools
+    ocf.utils
+    bar
+    tmux
+    s-tui
+
+    # Cosmetics
+    neofetch
+    pfetch-rs
   ];
 
   services = {

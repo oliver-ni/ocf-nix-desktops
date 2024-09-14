@@ -10,9 +10,8 @@
     };
   };
 
-  # TODO: Don't enable these by default
   ocf = {
-    etc.enable = lib.mkDefault true;
+    auth.enable = lib.mkDefault true;
     shell.enable = lib.mkDefault true;
   };
 
@@ -62,8 +61,6 @@
   };
 
   environment.systemPackages = with pkgs; [
-    # TODO: Move some of these out of base
-
     # System utilities
     dnsutils
     cpufrequtils
@@ -72,42 +69,19 @@
     usbutils
     cups
 
-    # Monitoring utilities
-    s-tui
-    htop
-    lsof
-
-    # Editors
-    vim
-    emacs
-    neovim
-    helix
-    kakoune
-
     # Networking tools
     rsync
     wget
     curl
 
-    # File management tools
-    bar
-    zip
-    unzip
-    _7zz
-    eza
-    file
-    tree
-
-    # Other tools
-    ocf.utils
+    # Other useful stuff
     tmux
-    screen
+    htop
+    file
+    vim
     git
-    comma-with-db
 
-    # Cosmetics
-    neofetch
-    pfetch-rs
+    comma-with-db
   ];
 
   services = {
