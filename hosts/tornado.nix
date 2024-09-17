@@ -18,7 +18,6 @@
 
   fonts.packages = [ pkgs.helvetica-neue-lt-std ];
 
-  security.pam.services.systemd-user.makeHomeDir = true;
   security.rtkit.enable = true;
 
   services = {

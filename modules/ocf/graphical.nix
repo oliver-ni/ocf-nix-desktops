@@ -35,9 +35,7 @@ in
         order = 0;
       };
 
-      # Create home directories
-      services.login.makeHomeDir = true;
-      services.sshd.makeHomeDir = true;
+      # This contains a bunch of KDE, etc. configs
       makeHomeDir.skelDirectory = "/etc/skel";
     };
 
