@@ -100,14 +100,6 @@ in
 
     environment.systemPackages = kubePkgs;
 
-    ocf.cri-o.enable = true;
-    ocf.cri-o.extraPackages = [ pkgs.gvisor ];
-    ocf.cri-o.settings = {
-      crio.runtime.runtimes.runsc = {
-        runtime_path = "${pkgs.gvisor}/bin/runsc";
-      };
-    };
-
     systemd.services.kubelet = {
       description = "Kubelet <https://kubernetes.io/docs/reference/command-line-tools-reference/kubelet/>";
       wantedBy = [ "multi-user.target" ];
@@ -141,5 +133,12 @@ in
       name = "ceph-hack";
       patch = ./kubernetes/ceph-hack.patch;
     }];
+
+    virtualisation.cri-o.enable = true;
+
+    # NixOS cri-o config does weird stuff... reverting these
+    environment.etc."cni/net.d/10-crio-bridge.conflist".enable = false;
+    environment.etc."cni/net.d/99-loopback.conflist".enable = false;
+    virtualisation.cri-o.settings.crio.network = lib.mkForce { };
   };
 }

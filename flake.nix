@@ -64,6 +64,7 @@
         ./modules/ocf/auth.nix
         ./modules/ocf/etc.nix
         ./modules/ocf/graphical.nix
+        ./modules/ocf/kubernetes.nix
         ./modules/ocf/network.nix
         ./modules/ocf/shell.nix
         ./modules/ocf/tmpfs-home.nix
