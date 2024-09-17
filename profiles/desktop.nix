@@ -5,6 +5,7 @@
     etc.enable = true;
     graphical.enable = true;
     tmpfsHome.enable = true;
+    network.wakeOnLan.enable = true;
   };
 
   boot.loader.systemd-boot.consoleMode = "max";
