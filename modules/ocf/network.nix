@@ -20,6 +20,7 @@ in
     extraRoutes = lib.mkOption {
       type = lib.types.anything;
       description = "Extra routes to place in the systemd-networkd config";
+      default = [ ];
     };
 
     wakeOnLan.enable = lib.mkEnableOption "Enable Wake-on-LAN";
@@ -31,13 +32,19 @@ in
     systemd.network = {
       enable = true;
 
-      links."10-${cfg.interface}" = lib.mkIf cfg.wakeOnLan.enable {
-        matchConfig.OriginalName = cfg.interface;
+      links."10-wired" = lib.mkIf cfg.wakeOnLan.enable {
+        matchConfig = {
+          OriginalName = cfg.interface;
+          Property = "!ID_BUS=usb";
+        };
         linkConfig.WakeOnLan = "magic";
       };
 
-      networks."10-${cfg.interface}" = {
-        matchConfig.Name = cfg.interface;
+      networks."10-wired" = {
+        matchConfig = {
+          Name = cfg.interface;
+          Property = "!ID_BUS=usb";
+        };
         linkConfig.RequiredForOnline = "routable";
         address = [
           "169.229.226.${toString cfg.lastOctet}/24"
